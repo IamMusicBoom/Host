@@ -2,6 +2,7 @@ package com.optima.plugin.host;
 
 import android.content.Context;
 
+import com.optima.plugin.repluginlib.PluginUtils.P_Context;
 import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginConfig;
 
@@ -16,6 +17,7 @@ public class MainApplication extends RePluginApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        P_Context.setContext(this);
 
     }
 
