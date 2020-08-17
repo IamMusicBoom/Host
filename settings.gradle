@@ -1,2 +1,4 @@
 include ':app'
+include ':repluginlib'
+project (':repluginlib').projectDir = new File('F:\\plugin\\repluginlib')
 rootProject.name='Host'
