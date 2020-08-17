@@ -17,6 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".broadcast.BroadcastTest">
+                <intent-filter>
+                    <action android:name="com.optima.plugin.host.ACTION_BROADCAST_RECEIVER"/>
+                </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
