@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginConfig;
-import com.wma.baselib.PluginUtils.ContextManager;
 
 /**
  * create by wma
