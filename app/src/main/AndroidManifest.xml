@@ -24,6 +24,9 @@
                 </intent-filter>
         </receiver>
 
+        <service android:name=".service.HostServiceTest"/>
+        <activity android:name=".activity.ServiceTestActivity"/>
+
     </application>
 
 </manifest>

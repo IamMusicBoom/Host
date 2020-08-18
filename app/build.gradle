@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+    }
+
 }
 // ATTENTION!!! Must be PLACED AFTER "android{}" to read the applicationId
 apply plugin: 'replugin-host-gradle'

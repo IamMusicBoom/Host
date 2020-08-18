@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
+import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.host.broadcast.BroadcastTest;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.PluginUtils.P_FileUtil;
@@ -30,9 +31,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         re = new BroadcastTest();
         IntentFilter filter = new IntentFilter();
         filter.addAction(P_Constants.ACTION_BROADCAST_RECEIVER);
-        registerReceiver(re,filter);
+        registerReceiver(re, filter);
         boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
-        if(pluginRunning){
+        if (pluginRunning) {
             return;
         }
         new Thread(new Runnable() {
@@ -61,12 +62,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Intent intent = new Intent();
             intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
             startActivityForResult(intent, P_Constants.REQUEST_CODE, true);
-        }else if(v.getId() == R.id.btn_send_broad_cast_receiver){// 给插件发送广播
+        } else if (v.getId() == R.id.btn_send_broad_cast_receiver) {// 给插件发送广播
             RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_1);
             RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_2);
             Intent intent = new Intent(P_Constants.ACTION_BROADCAST_RECEIVER);
-            intent.putExtra(P_Constants.INTENT_KEY,"WMA-OK");
+            intent.putExtra(P_Constants.INTENT_KEY, "WMA-OK");
             sendBroadcast(intent);
+        } else if (v.getId() == R.id.btn_go_service_test_activity) {
+            Intent intent = new Intent(MainActivity.this, ServiceTestActivity.class);
+            startActivity(intent);
+
         }
     }
 }
