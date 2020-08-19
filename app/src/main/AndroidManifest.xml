@@ -30,6 +30,12 @@
         <provider
             android:name=".provider.HostProvider"
             android:authorities="com.optima.plugin.host" />
+        <activity android:name=".activity.NotificationTestActivity"/>
+        <service android:name=".service.AIDLService">
+            <intent-filter>
+                <action android:name="hostMainService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

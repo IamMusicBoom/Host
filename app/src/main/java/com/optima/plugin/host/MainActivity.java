@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
+import com.optima.plugin.host.activity.NotificationTestActivity;
 import com.optima.plugin.host.activity.ProviderTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.host.broadcast.BroadcastTest;
@@ -79,6 +80,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //            startActivity(intent,true);
             Intent intent = new Intent(MainActivity.this,ProviderTestActivity.class);
             startActivity(intent);
+        }else if(v.getId() == R.id.btn_go_Notification_test_activity){
+            Intent intent = new Intent(MainActivity.this, NotificationTestActivity.class);
+            startActivity(intent);
+
         }
     }
 }
