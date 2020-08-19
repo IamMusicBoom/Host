@@ -7,12 +7,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
+import com.optima.plugin.host.activity.ProviderTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.host.broadcast.BroadcastTest;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.PluginUtils.P_FileUtil;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.qihoo360.replugin.RePlugin;
+import com.qihoo360.replugin.component.provider.PluginProviderClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +73,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_go_service_test_activity) {
             Intent intent = new Intent(MainActivity.this, ServiceTestActivity.class);
             startActivity(intent);
-
+        }else if(v.getId() == R.id.btn_go_provider_test_activity){
+//            Intent intent = new Intent();
+//            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.activity.ProviderTestActivity"));
+//            startActivity(intent,true);
+            Intent intent = new Intent(MainActivity.this,ProviderTestActivity.class);
+            startActivity(intent);
         }
     }
 }

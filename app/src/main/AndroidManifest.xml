@@ -19,14 +19,17 @@
         </activity>
 
         <receiver android:name=".broadcast.BroadcastTest">
-                <intent-filter>
-                    <action android:name="com.optima.plugin.host.ACTION_BROADCAST_RECEIVER"/>
-                </intent-filter>
+            <intent-filter>
+                <action android:name="com.optima.plugin.host.ACTION_BROADCAST_RECEIVER" />
+            </intent-filter>
         </receiver>
 
-        <service android:name=".service.HostServiceTest"/>
-        <activity android:name=".activity.ServiceTestActivity"/>
-
+        <service android:name=".service.HostServiceTest" />
+        <activity android:name=".activity.ServiceTestActivity" />
+        <activity android:name=".activity.ProviderTestActivity"/>
+        <provider
+            android:name=".provider.HostProvider"
+            android:authorities="com.optima.plugin.host" />
     </application>
 
 </manifest>
