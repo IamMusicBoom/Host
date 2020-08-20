@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ReflexTestActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +26,19 @@
         </receiver>
 
         <service android:name=".service.HostServiceTest" />
+
         <activity android:name=".activity.ServiceTestActivity" />
-        <activity android:name=".activity.ProviderTestActivity"/>
+        <activity android:name=".activity.ProviderTestActivity" />
+
         <provider
             android:name=".provider.HostProvider"
             android:authorities="com.optima.plugin.host" />
-        <activity android:name=".activity.NotificationTestActivity"/>
+
+        <activity android:name=".activity.NotificationTestActivity" />
+
         <service android:name=".service.AIDLService">
             <intent-filter>
-                <action android:name="hostMainService"/>
+                <action android:name="hostMainService" />
             </intent-filter>
         </service>
     </application>
