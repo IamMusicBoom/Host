@@ -5,11 +5,25 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_show_notification"
+        android:id="@+id/btn_show_default_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="show通知" />
+        android:text="show一般通知" />
+
+    <Button
+        android:id="@+id/btn_show_importance_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="show重要通知" />
+
+    <Button
+        android:id="@+id/btn_show_customize_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="show自定义布局通知" />
 
     <Button
         android:id="@+id/btn_go_plugin_notification_activity"

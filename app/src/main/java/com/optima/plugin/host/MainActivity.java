@@ -76,9 +76,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Intent intent = new Intent(MainActivity.this, ServiceTestActivity.class);
             startActivity(intent);
         }else if(v.getId() == R.id.btn_go_provider_test_activity){
-//            Intent intent = new Intent();
-//            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.activity.ProviderTestActivity"));
-//            startActivity(intent,true);
             Intent intent = new Intent(MainActivity.this,ProviderTestActivity.class);
             startActivity(intent);
         }else if(v.getId() == R.id.btn_go_Notification_test_activity){

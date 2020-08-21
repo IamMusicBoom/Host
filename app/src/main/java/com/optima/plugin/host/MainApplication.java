@@ -1,6 +1,8 @@
 package com.optima.plugin.host;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 
 import com.optima.plugin.repluginlib.PluginUtils.P_Context;
 import com.qihoo360.replugin.RePluginApplication;
@@ -18,7 +20,12 @@ public class MainApplication extends RePluginApplication {
     public void onCreate() {
         super.onCreate();
         P_Context.setContext(this);
-
+        Intent intent = new Intent(this,MainService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        }else{
+            startService(intent);
+        }
     }
 
     @Override

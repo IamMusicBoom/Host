@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.PluginUtils.P_Context;
 
 /**
  * create by wma
@@ -16,7 +17,11 @@ public class BroadcastTest extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intent != null){
-            Logger.d(TAG, "onReceive: " + intent.getStringExtra(P_Constants.INTENT_KEY));
+            String alias = intent.getStringExtra(P_Constants.INTENT_ALIAS);
+            String className = intent.getStringExtra(P_Constants.INTENT_CLASS_NAME);
+            Intent goIntent = P_Context.createIntent(alias, className);
+            goIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            P_Context.startPluginActivity(context,goIntent);
         }
     }
 }
