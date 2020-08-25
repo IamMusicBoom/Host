@@ -37,35 +37,31 @@ public class NotificationTestActivity extends BaseActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_show_default_notification) {// 展示默认通知栏
-//            Intent intent = new Intent(NotificationTestActivity.this,TransitActivity.class);
-//            intent.putExtra(P_Constants.INTENT_ALIAS,P_Constants.ALIAS_PLUGIN_1);
-//            intent.putExtra(P_Constants.INTENT_CLASS_NAME,"com.optima.plugin.plugin1.activity.NotificationTestActivity");
-//            PendingIntent pendingIntent = PendingIntent.getActivity(NotificationTestActivity.this,0,intent,0);
+            Intent intent = TransitActivity.createStartActivityIntent(NotificationTestActivity.this, P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.Plugin1MainActivity");
+            PendingIntent pendingIntent = TransitActivity.createPendingIntent(NotificationTestActivity.this,intent);
             NotificationCompat.Builder builder = utils.createDefaultBuilder();
-            builder.setContentText("通知").setContentTitle("默认通知").setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.icon_large));
+            builder.setContentText("通知").setContentTitle("默认通知").setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_large)).setContentIntent(pendingIntent);
             utils.showNotification(666, builder.build());
         } else if (v.getId() == R.id.btn_show_importance_notification) {// 展示重要通知栏
-//            Intent intent = new Intent(P_Constants.ACTION_BROADCAST_RECEIVER);
-//            intent.setComponent(new ComponentName("com.optima.plugin.host","com.optima.plugin.host.broadcast.BroadcastTest"));
-//            intent.putExtra(P_Constants.INTENT_ALIAS,P_Constants.ALIAS_PLUGIN_1);
-//            intent.putExtra(P_Constants.INTENT_CLASS_NAME,"com.optima.plugin.plugin1.activity.NotificationTestActivity");
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(NotificationTestActivity.this,0,intent,0);
+            Intent intent = TransitActivity.createStartServiceIntent(NotificationTestActivity.this, P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.service.Plugin1ServiceTest");
+            PendingIntent pendingIntent = TransitActivity.createPendingIntent(NotificationTestActivity.this,intent);
             NotificationCompat.Builder builder = utils.createImportanceBuilder();
-            builder.setContentText("通知").setContentTitle("重要通知").setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.icon_large));
+            builder.setContentText("通知").setContentTitle("重要通知").setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_large)).setContentIntent(pendingIntent);
             utils.showNotification(777, builder.build());
-        } else if(v.getId() == R.id.btn_show_customize_notification){
+        } else if (v.getId() == R.id.btn_show_customize_notification) {
+//            PendingIntent pendingIntent = TransitActivity.createSendBroadcastPendingIntent(NotificationTestActivity.this, P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.broadcast.BroadcastTest");
             NotificationCompat.Builder builder = utils.createDefaultBuilder();
-            RemoteViews smallView = new RemoteViews(getPackageName(),R.layout.notification_small);
-            RemoteViews largeView = new RemoteViews(getPackageName(),R.layout.notification_large);
+            RemoteViews smallView = new RemoteViews(getPackageName(), R.layout.notification_small);
+            RemoteViews largeView = new RemoteViews(getPackageName(), R.layout.notification_large);
             builder.setCustomContentView(smallView);
             builder.setCustomBigContentView(largeView);
             Intent intent = new Intent(this, MainActivity.class);
-            PendingIntent sure = PendingIntent.getActivity(this,0,intent,0);
-            largeView.setOnClickPendingIntent(R.id.btn_sure,sure);
+            PendingIntent sure = PendingIntent.getActivity(this, 0, intent, 0);
+            largeView.setOnClickPendingIntent(R.id.btn_sure, sure);
             utils.showNotification(888, builder.build());
-        }else if (v.getId() == R.id.btn_go_plugin_notification_activity) {// 去插件的通栏测试Activity
+        } else if (v.getId() == R.id.btn_go_plugin_notification_activity) {// 去插件的通栏测试Activity
             Intent intent = P_Context.createIntent(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.activity.NotificationTestActivity");
-            startActivity(intent,true);
+            startActivity(intent, true);
         }
     }
 

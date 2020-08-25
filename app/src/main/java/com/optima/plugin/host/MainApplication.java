@@ -8,6 +8,8 @@ import com.optima.plugin.repluginlib.PluginUtils.P_Context;
 import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginConfig;
 
+import org.xutils.x;
+
 /**
  * create by wma
  * on 2020/8/13 0013
@@ -20,6 +22,7 @@ public class MainApplication extends RePluginApplication {
     public void onCreate() {
         super.onCreate();
         P_Context.setContext(this);
+        x.Ext.init(this);
         Intent intent = new Intent(this,MainService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent);

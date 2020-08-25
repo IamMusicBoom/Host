@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Process;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -12,7 +13,7 @@ import androidx.annotation.Nullable;
 import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_Context;
+import com.optima.plugin.repluginlib.PluginUtils.P_Manager;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 
 /**
@@ -25,6 +26,8 @@ public class ServiceTestActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_test);
+        Logger.d(TAG, "onCreate: pid = " + Process.myPid() + " taskId = " + getTaskId());
+        Logger.d(TAG, "onCreate: pid = " + android.os.Process.myPid() + " ProcessName = " + P_Manager.getProcessName(android.os.Process.myPid() ));
     }
 
     MyServiceConnection connection = new MyServiceConnection();

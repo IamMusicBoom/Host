@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.optima.plugin.host">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -13,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ReflexTestActivity"></activity>
+        <activity android:name=".activity.PluginManagerTestActivity"></activity>
+        <activity android:name=".activity.ReflexTestActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +32,14 @@
 
         <service android:name=".service.HostServiceTest" />
 
-        <activity android:name=".activity.ServiceTestActivity" />
-        <activity android:name=".activity.ProviderTestActivity" />
+        <activity android:name=".activity.ServiceTestActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.optima.plugin.host.otherTask"
+            android:process=":wtf"/>
+        <activity android:name=".activity.ProviderTestActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.optima.plugin.host.otherTask"
+            android:process=":wtf"/>
 
         <provider
             android:name=".provider.HostProvider"
@@ -44,10 +52,13 @@
                 <action android:name="hostMainService" />
             </intent-filter>
         </service>
-        <service android:name="MainService">
+        <service android:name=".MainService"
+            android:process=":GuardService">
 
         </service>
-        <activity android:name=".activity.TransitActivity"/>
+
+        <activity android:name=".activity.TransitActivity" />
+
     </application>
 
 </manifest>

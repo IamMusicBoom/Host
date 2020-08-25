@@ -3,20 +3,20 @@ package com.optima.plugin.host;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
 import com.optima.plugin.host.activity.NotificationTestActivity;
+import com.optima.plugin.host.activity.PluginManagerTestActivity;
 import com.optima.plugin.host.activity.ProviderTestActivity;
 import com.optima.plugin.host.activity.ReflexTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
-import com.optima.plugin.host.broadcast.BroadcastTest;
+import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.PluginUtils.P_FileUtil;
+import com.optima.plugin.repluginlib.PluginUtils.P_Manager;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.qihoo360.replugin.RePlugin;
-import com.qihoo360.replugin.component.provider.PluginProviderClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +25,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     List<String> fileNames = new ArrayList<>();
     final String FILE_NAME_PLUGIN_1 = "plugin1.apk";
     final String FILE_NAME_PLUGIN_2 = "plugin2.apk";
-    BroadcastTest re;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        re = new BroadcastTest();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(P_Constants.ACTION_BROADCAST_RECEIVER);
-        registerReceiver(re, filter);
+
         boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
         if (pluginRunning) {
             return;
@@ -44,16 +41,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void run() {
                 fileNames.add(FILE_NAME_PLUGIN_1);
-                fileNames.add(FILE_NAME_PLUGIN_2);
+//                fileNames.add(FILE_NAME_PLUGIN_2);
                 P_FileUtil.simulateInstallExternalPlugin(fileNames);
             }
         }).start();
+        Logger.d(TAG, "onCreate: pid = " + android.os.Process.myPid() + " taskId = " + getTaskId());
+        Logger.d(TAG, "onCreate: pid = " + android.os.Process.myPid() + " ProcessName = " + P_Manager.getProcessName(android.os.Process.myPid() ));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(re);
     }
 
     @Override
@@ -70,6 +68,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_1);
             RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_2);
             Intent intent = new Intent(P_Constants.ACTION_BROADCAST_RECEIVER);
+            intent.putExtra(P_Constants.INTENT_ALIAS,P_Constants.ALIAS_PLUGIN_1);
+            intent.putExtra(P_Constants.INTENT_CLASS_NAME,P_Constants.PACKAGE_NAME_PLUGIN_1+".activity.BroadcastActivity");
             intent.putExtra(P_Constants.INTENT_KEY, "WMA-OK");
             sendBroadcast(intent);
         } else if (v.getId() == R.id.btn_go_service_test_activity) {
@@ -83,6 +83,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(intent);
         }else if(v.getId() == R.id.btn_go_reflex_test_activity){
             Intent intent = new Intent(MainActivity.this, ReflexTestActivity.class);
+            startActivity(intent);
+
+        }else if(v.getId() == R.id.btn_go_plugin_manager_test_activity){// 插件管理测试界面
+            Intent intent = new Intent(MainActivity.this, PluginManagerTestActivity.class);
             startActivity(intent);
 
         }
