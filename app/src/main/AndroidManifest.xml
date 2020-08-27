@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application
         android:name=".MainApplication"
@@ -24,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".broadcast.BroadcastTest">
+        <receiver android:name=".broadcast.LockScreenReceiver">
             <intent-filter>
                 <action android:name="com.optima.plugin.host.ACTION_BROADCAST_RECEIVER" />
             </intent-filter>
@@ -47,7 +48,8 @@
 
         <activity android:name=".activity.NotificationTestActivity" />
 
-        <service android:name=".service.AIDLService">
+        <service android:name=".service.AIDLService"
+            android:process=":GuardService">
             <intent-filter>
                 <action android:name="hostMainService" />
             </intent-filter>
@@ -58,6 +60,8 @@
         </service>
 
         <activity android:name=".activity.TransitActivity" />
+
+        <activity android:name=".activity.LockScreenActivity"/>
 
     </application>
 

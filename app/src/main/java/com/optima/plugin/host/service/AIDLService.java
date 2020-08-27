@@ -50,7 +50,7 @@ public class AIDLService extends Service {
         super.onDestroy();
     }
 
-    class HostBinder extends IHostImpl.Stub {
+   public class HostBinder extends IHostImpl.Stub {
 
         @Override
         public void say(String word) throws RemoteException {

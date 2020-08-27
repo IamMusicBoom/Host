@@ -50,7 +50,7 @@ public class NotificationTestActivity extends BaseActivity implements View.OnCli
             builder.setContentText("通知").setContentTitle("重要通知").setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_large)).setContentIntent(pendingIntent);
             utils.showNotification(777, builder.build());
         } else if (v.getId() == R.id.btn_show_customize_notification) {
-//            PendingIntent pendingIntent = TransitActivity.createSendBroadcastPendingIntent(NotificationTestActivity.this, P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.broadcast.BroadcastTest");
+//            PendingIntent pendingIntent = TransitActivity.createSendBroadcastPendingIntent(NotificationTestActivity.this, P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.broadcast.LockScreenReceiver");
             NotificationCompat.Builder builder = utils.createDefaultBuilder();
             RemoteViews smallView = new RemoteViews(getPackageName(), R.layout.notification_small);
             RemoteViews largeView = new RemoteViews(getPackageName(), R.layout.notification_large);

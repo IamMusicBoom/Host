@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.optima.plugin.host.binder.HostBinderFetcher;
 import com.optima.plugin.repluginlib.PluginUtils.P_Context;
+import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginConfig;
 
