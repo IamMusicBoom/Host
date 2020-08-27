@@ -25,6 +25,14 @@
         android:onClick="onClick"
         android:text="show自定义布局通知" />
 
+
+    <Button
+        android:id="@+id/btn_show_download_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="show下载通知" />
+
     <Button
         android:id="@+id/btn_go_plugin_notification_activity"
         android:layout_width="match_parent"
