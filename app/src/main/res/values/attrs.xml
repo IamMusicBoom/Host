@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GestureLockView">
+        <attr name="lineColor" format="color|integer"/>
+        <attr name="pointColor" format="color|integer"/>
+        <attr name="circleLineColor" format="color|integer"/>
+        <attr name="circleColor" format="color|integer"/>
+    </declare-styleable>
+</resources>

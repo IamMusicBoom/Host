@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.optima.plugin.host.activity.BinderTestActivity;
+import com.optima.plugin.host.activity.LockScreenActivity;
 import com.optima.plugin.host.activity.NotificationTestActivity;
 import com.optima.plugin.host.activity.PluginManagerTestActivity;
 import com.optima.plugin.host.activity.ProviderTestActivity;
@@ -32,7 +33,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
         if (pluginRunning) {
@@ -92,6 +92,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         }else if(v.getId() == R.id.btn_go_test_binder_activity){// binder测试
             Intent intent = new Intent(MainActivity.this, BinderTestActivity.class);
+            startActivity(intent);
+        }else if(v.getId() == R.id.btn_go_lock_screen_activity){
+            Intent intent = new Intent(MainActivity.this, LockScreenActivity.class);
             startActivity(intent);
         }
     }

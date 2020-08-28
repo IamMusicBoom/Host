@@ -24,6 +24,9 @@ public class LockScreenReceiver extends BroadcastReceiver {
                 Logger.d(TAG, "onReceive: 解锁");
             } else if (Intent.ACTION_USER_PRESENT.equals(action)) {// 屏幕点亮，且解锁
                 Logger.d(TAG, "onReceive: ACTION_USER_PRESENT");
+                Intent lockIntent = new Intent(context, LockScreenActivity.class);
+                lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(lockIntent);
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {// 熄屏幕
                 Logger.d(TAG, "onReceive: 锁屏");
                 Intent lockIntent = new Intent(context, LockScreenActivity.class);
