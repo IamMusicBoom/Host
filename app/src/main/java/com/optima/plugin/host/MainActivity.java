@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.optima.plugin.host.activity.BinderTestActivity;
 import com.optima.plugin.host.activity.NotificationTestActivity;
 import com.optima.plugin.host.activity.PluginManagerTestActivity;
 import com.optima.plugin.host.activity.ProviderTestActivity;
@@ -89,6 +90,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Intent intent = new Intent(MainActivity.this, PluginManagerTestActivity.class);
             startActivity(intent);
 
+        }else if(v.getId() == R.id.btn_go_test_binder_activity){// binder测试
+            Intent intent = new Intent(MainActivity.this, BinderTestActivity.class);
+            startActivity(intent);
         }
     }
 }

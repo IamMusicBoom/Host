@@ -2,8 +2,6 @@ package com.optima.plugin.host.binder;
 
 import android.os.IBinder;
 
-import com.optima.plugin.host.MainService;
-import com.optima.plugin.host.service.AIDLService;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
 import com.qihoo360.replugin.IHostBinderFetcher;
@@ -19,6 +17,9 @@ public class HostBinderFetcher implements IHostBinderFetcher {
         Logger.d(TAG, "query: module = " + module);
         if(P_Constants.LOCK_SCREEN_BINDER.equals(module)){
             return new LockScreenBinder();
+        }
+        if(P_Constants.HOST_BINDER.equals(module)){
+            return new HostBinder();
         }
         return null;
     }

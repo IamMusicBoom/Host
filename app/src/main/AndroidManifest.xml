@@ -62,6 +62,7 @@
         <activity android:name=".activity.TransitActivity" />
 
         <activity android:name=".activity.LockScreenActivity"/>
+        <activity android:name=".activity.BinderTestActivity"/>
 
     </application>
 
