@@ -3,4 +3,30 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="lineColor">#FF00FFFF</color>
+
+    <color name="pointColor">#FF00FFFF</color>
+
+    <color name="circleLineColor">#FF00FFFF</color>
+
+    <color name="circleColor">#FF00FFFF</color>
+
+    <color name="errorLineColor">#FF2D57</color>
+
+    <color name="errorPointColor">#FF2D57</color>
+
+    <color name="errorCircleLineColor">#FF2D57</color>
+
+    <color name="errorCircleColor">#FF2D57</color>
+
+
+    <color name="setLineColor">#03DD0D</color>
+
+    <color name="setPointColor">#03DD0D</color>
+
+    <color name="setCircleLineColor">#03DD0D</color>
+
+    <color name="setCircleColor">#03DD0D</color>
+
 </resources>
