@@ -364,6 +364,11 @@ public class GestureLockView extends View {
         }
     }
 
+    public void clearPassword() {
+        mSP.putPassword("");
+        setCurStatus(INPUT_STATUS);
+    }
+
     public interface OnVerifyListener {
         void pass();
 

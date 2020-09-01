@@ -53,6 +53,7 @@ public class LockScreenActivity extends BaseActivity implements View.OnClickList
             @Override
             public void forget() {
                 Logger.d(TAG, "forget: ");
+                gestureLockGroup.clearPassword();
             }
         });
     }

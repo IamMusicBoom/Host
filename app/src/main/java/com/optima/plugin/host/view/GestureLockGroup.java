@@ -119,6 +119,10 @@ public class GestureLockGroup extends LinearLayout implements GestureLockView.On
 
     OnVerifyListener onVerifyListener;
 
+    public void clearPassword() {
+        mLockView.clearPassword();
+    }
+
     public interface OnVerifyListener {
         void pass();
 
