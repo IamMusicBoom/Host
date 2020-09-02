@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.optima.plugin.host.activity.BinderTestActivity;
+import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.LockScreenActivity;
 import com.optima.plugin.host.activity.NotificationTestActivity;
 import com.optima.plugin.host.activity.PluginManagerTestActivity;
@@ -14,16 +15,16 @@ import com.optima.plugin.host.activity.ProviderTestActivity;
 import com.optima.plugin.host.activity.ReflexTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_FileUtil;
-import com.optima.plugin.repluginlib.PluginUtils.P_Manager;
-import com.optima.plugin.repluginlib.base.BaseActivity;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_FileUtil;
+import com.optima.plugin.repluginlib.pluginUtils.P_Manager;
+import com.optima.plugin.repluginlib.base.BasePermissionActivity;
 import com.qihoo360.replugin.RePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BasePermissionActivity implements View.OnClickListener {
     List<String> fileNames = new ArrayList<>();
     final String FILE_NAME_PLUGIN_1 = "plugin1.apk";
     final String FILE_NAME_PLUGIN_2 = "plugin2.apk";
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setNeedCheckPermission(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -95,6 +97,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(intent);
         }else if(v.getId() == R.id.btn_go_lock_screen_activity){
             Intent intent = new Intent(MainActivity.this, LockScreenActivity.class);
+            startActivity(intent);
+        }else if(v.getId() == R.id.btn_go_download){
+            Intent intent = new Intent(MainActivity.this, DownloadActivity.class);
             startActivity(intent);
         }
     }

@@ -6,8 +6,8 @@ import android.content.Intent;
 
 import com.optima.plugin.host.activity.LockScreenActivity;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_Context;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 
 /**
  * create by wma

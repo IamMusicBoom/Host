@@ -2,17 +2,13 @@ package com.optima.plugin.host.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
 
 /**
  * create by wma

@@ -8,7 +8,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.qihoo360.replugin.helper.LogDebug;
 
 /**

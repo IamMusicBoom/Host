@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import com.optima.plugin.host.binder.HostBinderFetcher;
 import com.optima.plugin.host.broadcast.LockScreenReceiver;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_Manager;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_Manager;
 import com.optima.plugin.repluginlib.utils.NotificationUtils;
 import com.qihoo360.replugin.IHostBinderFetcher;
 import com.qihoo360.replugin.RePlugin;
@@ -27,7 +27,7 @@ public class MainService extends Service {
 
     @Override
     public void onCreate() {
-        Logger.d(TAG, "onCreate: ");
+        Logger.d(TAG, "onCreate: packageName = " + P_Constants.HOST_PACKAGE_NAME);
         super.onCreate();
         startForeground(1001, new NotificationUtils().createDefaultBuilder().setGroupSummary(true).build());
         screenReceiver = new LockScreenReceiver();
@@ -38,14 +38,14 @@ public class MainService extends Service {
         filter.addAction(Intent.ACTION_USER_UNLOCKED);
         registerReceiver(screenReceiver, filter);
         Logger.d(TAG, "onCreate: pid = " + android.os.Process.myPid() + " ProcessName = " + P_Manager.getProcessName(android.os.Process.myPid()));
-//        HostBinderFetcher hostBinderFetcher = new HostBinderFetcher();
-//        RePlugin.registerHostBinder(hostBinderFetcher);
-//        RePlugin.registerGlobalBinder(P_Constants.LOCK_SCREEN_BINDER, new ILockScreenImpl.Stub() {
-//            @Override
-//            public void setUseLockScreen(String pluginName, int priority) throws RemoteException {
-//                Logger.d(TAG, "setUseLockScreen: pluginName = " + pluginName + " priority = " + priority);
-//            }
-//        });
+        HostBinderFetcher hostBinderFetcher = new HostBinderFetcher();
+        RePlugin.registerHostBinder(hostBinderFetcher);
+        RePlugin.registerGlobalBinder(P_Constants.LOCK_SCREEN_BINDER, new ILockScreenImpl.Stub() {
+            @Override
+            public void setUseLockScreen(String pluginName, int priority) throws RemoteException {
+                Logger.d(TAG, "setUseLockScreen: pluginName = " + pluginName + " priority = " + priority);
+            }
+        });
     }
 
     @Override

@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 
 import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_Context;
-import com.optima.plugin.repluginlib.PluginUtils.P_Manager;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_Context;
+import com.optima.plugin.repluginlib.pluginUtils.P_Manager;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.ComponentList;

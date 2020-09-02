@@ -1,11 +1,8 @@
 package com.optima.plugin.host.activity;
 
-import android.app.Notification;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -15,8 +12,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.optima.plugin.host.MainActivity;
 import com.optima.plugin.host.R;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_Context;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.optima.plugin.repluginlib.utils.NotificationUtils;
 

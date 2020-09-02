@@ -1,13 +1,9 @@
 package com.optima.plugin.host.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -21,7 +17,6 @@ import androidx.core.content.ContextCompat;
 import com.google.gson.Gson;
 import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_SPManager;
 import com.optima.plugin.repluginlib.utils.ResourceUtils;
 
 import java.util.ArrayList;

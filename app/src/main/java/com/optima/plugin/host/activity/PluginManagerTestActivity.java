@@ -7,18 +7,13 @@ import android.view.View;
 
 import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
-import com.optima.plugin.repluginlib.PluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.PluginUtils.P_FileUtil;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
+import com.optima.plugin.repluginlib.pluginUtils.P_FileUtil;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.model.PluginInfo;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class PluginManagerTestActivity extends AppCompatActivity implements View.OnClickListener{
     final String FILE_NAME_PLUGIN_2 = "plugin2.apk";

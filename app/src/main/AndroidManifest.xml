@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MainApplication"
@@ -14,6 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.PluginManagerTestActivity"></activity>
         <activity android:name=".activity.ReflexTestActivity" />
@@ -64,6 +68,7 @@
         <activity android:name=".activity.LockScreenActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".activity.BinderTestActivity"/>
+        <activity android:name=".activity.DownloadActivity"/>
 
     </application>
 
