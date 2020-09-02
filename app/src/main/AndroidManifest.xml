@@ -69,6 +69,11 @@
             android:launchMode="singleTask"/>
         <activity android:name=".activity.BinderTestActivity"/>
         <activity android:name=".activity.DownloadActivity"/>
+        <service android:name=".service.CommonAIDLService">
+            <intent-filter>
+                <action android:name="ACTION_COMMON_AIDL"/>
+            </intent-filter>
+        </service>
 
     </application>
 
