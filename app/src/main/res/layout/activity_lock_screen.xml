@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:src="@mipmap/lock_screen"/>
 
-    <com.optima.plugin.host.view.GestureLockGroup
+    <com.optima.plugin.host.view.gesture.GestureLockGroup
         android:id="@+id/gesture_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

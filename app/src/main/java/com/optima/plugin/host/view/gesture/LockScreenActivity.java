@@ -1,18 +1,15 @@
-package com.optima.plugin.host.activity;
+package com.optima.plugin.host.view.gesture;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
 import com.optima.plugin.host.R;
-import com.optima.plugin.host.view.GestureLockGroup;
-import com.optima.plugin.host.view.GestureLockView;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 

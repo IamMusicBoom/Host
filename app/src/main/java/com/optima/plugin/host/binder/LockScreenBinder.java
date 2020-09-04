@@ -3,7 +3,6 @@ package com.optima.plugin.host.binder;
 import android.os.RemoteException;
 
 import com.optima.plugin.host.ILockScreenImpl;
-import com.optima.plugin.host.activity.LockScreenActivity;
 import com.optima.plugin.repluginlib.Logger;
 
 /**

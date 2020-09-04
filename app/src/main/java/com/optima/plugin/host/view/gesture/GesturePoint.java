@@ -1,4 +1,4 @@
-package com.optima.plugin.host.view;
+package com.optima.plugin.host.view.gesture;
 
 import android.animation.ValueAnimator;
 import android.graphics.Point;

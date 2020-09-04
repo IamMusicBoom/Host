@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.optima.plugin.host.activity.LockScreenActivity;
+import com.optima.plugin.host.view.gesture.LockScreenActivity;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;

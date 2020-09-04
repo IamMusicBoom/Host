@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MainApplication"
@@ -17,9 +17,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.PluginManagerTestActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.WaveViewActivity"></activity>
+        <activity android:name=".activity.PluginManagerTestActivity" />
         <activity android:name=".activity.ReflexTestActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -37,14 +38,16 @@
 
         <service android:name=".service.HostServiceTest" />
 
-        <activity android:name=".activity.ServiceTestActivity"
+        <activity
+            android:name=".activity.ServiceTestActivity"
             android:launchMode="singleTask"
-            android:taskAffinity="com.optima.plugin.host.otherTask"
-            android:process=":wtf"/>
-        <activity android:name=".activity.ProviderTestActivity"
+            android:process=":wtf"
+            android:taskAffinity="com.optima.plugin.host.otherTask" />
+        <activity
+            android:name=".activity.ProviderTestActivity"
             android:launchMode="singleTask"
-            android:taskAffinity="com.optima.plugin.host.otherTask"
-            android:process=":wtf"/>
+            android:process=":wtf"
+            android:taskAffinity="com.optima.plugin.host.otherTask" />
 
         <provider
             android:name=".provider.HostProvider"
@@ -52,29 +55,29 @@
 
         <activity android:name=".activity.NotificationTestActivity" />
 
-        <service android:name=".service.AIDLService"
+        <service
+            android:name=".service.AIDLService"
             android:process=":GuardService">
             <intent-filter>
                 <action android:name="hostMainService" />
             </intent-filter>
         </service>
-        <service android:name=".MainService"
-            android:process=":GuardService">
-
-        </service>
+        <service
+            android:name=".MainService"
+            android:process=":GuardService"></service>
 
         <activity android:name=".activity.TransitActivity" />
+        <activity
+            android:name=".view.gesture.LockScreenActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.BinderTestActivity" />
+        <activity android:name=".activity.DownloadActivity" />
 
-        <activity android:name=".activity.LockScreenActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.BinderTestActivity"/>
-        <activity android:name=".activity.DownloadActivity"/>
         <service android:name=".service.CommonAIDLService">
             <intent-filter>
-                <action android:name="ACTION_COMMON_AIDL"/>
+                <action android:name="ACTION_COMMON_AIDL" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

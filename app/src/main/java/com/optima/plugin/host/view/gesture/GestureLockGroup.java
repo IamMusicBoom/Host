@@ -1,4 +1,4 @@
-package com.optima.plugin.host.view;
+package com.optima.plugin.host.view.gesture;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,10 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.utils.ResourceUtils;
-
-import org.w3c.dom.Text;
 
 /**
  * create by wma
