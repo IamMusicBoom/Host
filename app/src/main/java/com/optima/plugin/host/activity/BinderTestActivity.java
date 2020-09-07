@@ -13,12 +13,11 @@ import com.optima.plugin.host.R;
 import com.optima.plugin.host.binder.HostBinder;
 import com.optima.plugin.host.binder.HostBinderFetcher;
 import com.optima.plugin.host.module.User;
-import com.optima.plugin.host.utils.P_Binder;
+import com.optima.plugin.host.utils.H_Binder;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 import com.optima.plugin.repluginlib.base.BaseActivity;
-import com.qihoo360.replugin.RePlugin;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class BinderTestActivity extends BaseActivity implements View.OnClickList
             Intent intent = P_Context.createIntent(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.activity.BinderTestActivity");
             startActivity(intent,true);
         }else if(v.getId() == R.id.register_host_binder){
-            P_Binder.registerHostBinder(new HostBinderFetcher());
+            H_Binder.registerHostBinder(new HostBinderFetcher());
         }else if(v.getId() == R.id.register_global_binder){
             com.optima.plugin.repluginlib.pluginUtils.P_Binder.registerGlobalBinder("globalBinder",new HostBinder());
         }else if(v.getId() == R.id.get_plugin_binder){

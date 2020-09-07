@@ -9,6 +9,7 @@ import android.view.View;
 import com.optima.plugin.host.activity.BinderTestActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.UsePluginFragmentActivity;
+import com.optima.plugin.host.activity.UsePluginViewActivity;
 import com.optima.plugin.host.activity.WaveViewActivity;
 import com.optima.plugin.host.view.gesture.LockScreenActivity;
 import com.optima.plugin.host.activity.NotificationTestActivity;
@@ -108,6 +109,9 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             startActivity(intent);
         }else if(v.getId() == R.id.btn_go_plugin_fragment){
             Intent intent = new Intent(MainActivity.this, UsePluginFragmentActivity.class);
+            startActivity(intent);
+        }else if(v.getId() == R.id.btn_go_plugin_view){
+            Intent intent = new Intent(MainActivity.this, UsePluginViewActivity.class);
             startActivity(intent);
         }
 

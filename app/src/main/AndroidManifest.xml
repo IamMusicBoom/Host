@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UsePluginFragmentActivity"></activity>
+        <activity android:name=".activity.UsePluginViewActivity"></activity>
+        <activity android:name=".activity.UsePluginFragmentActivity" />
         <activity android:name=".activity.WaveViewActivity" />
         <activity android:name=".activity.PluginManagerTestActivity" />
         <activity android:name=".activity.ReflexTestActivity" />

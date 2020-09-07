@@ -52,9 +52,6 @@ public class UsePluginFragmentActivity extends AppCompatActivity implements View
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-            AppWidgetHost.
-            AppWidgetProviderInfo appWidgetInfo = AppWidgetManager.getInstance().;
-            AppWidgetManager.getInstance().updateAppWidget();
             Logger.d(TAG, "onClick: ");
         }else if(v.getId() == R.id.btn_use_plugin_fragment){// 使用插件fragment对象
             dialog.show();

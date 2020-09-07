@@ -1,4 +1,4 @@
-package com.optima.plugin.host.view.download;
+package com.optima.plugin.host.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -12,14 +12,15 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.optima.plugin.host.view.download.WaveView;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.utils.ResourceUtils;
 
 /**
  * create by wma
- * on 2020/9/3 0003
+ * on 2020/9/7 0007
  */
-public class WaveView extends View {
+public class TestTextView extends View {
     String TAG = WaveView.class.getSimpleName();
     Paint mPaint;
     Path mPath;
@@ -31,15 +32,15 @@ public class WaveView extends View {
 
     long mMax = -1;
 
-    public WaveView(Context context) {
+    public TestTextView(Context context) {
         this(context, null);
     }
 
-    public WaveView(Context context, @Nullable AttributeSet attrs) {
+    public TestTextView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WaveView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TestTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         init();

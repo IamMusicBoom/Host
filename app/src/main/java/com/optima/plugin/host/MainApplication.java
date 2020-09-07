@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.optima.plugin.host.binder.HostBinderFetcher;
+import com.optima.plugin.host.utils.H_Binder;
+import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginApplication;
@@ -30,6 +33,8 @@ public class MainApplication extends RePluginApplication {
         }else{
             startService(intent);
         }
+//        RePlugin.registerHookingClass("com.optima.plugin.host.view.download.WaveView", RePlugin.createComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.host.view.download.WaveView"), null);
+
     }
 
     @Override

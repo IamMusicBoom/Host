@@ -8,7 +8,7 @@ import com.qihoo360.replugin.RePlugin;
  * create by wma
  * on 2020/8/28 0028
  */
-public class P_Binder {
+public class H_Binder {
 
     /**
      * 注册一个宿主的binder
