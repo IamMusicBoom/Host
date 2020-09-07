@@ -19,6 +19,9 @@ import com.optima.plugin.repluginlib.pluginUtils.P_Resource;
 import com.qihoo360.replugin.RePlugin;
 
 
+/**
+ * 使用插件中的View,主要是插件与宿主建的通信，用注册binder的方式比较方便，可以使用自定义View,如果需要使用自定义View的对象，那么自定义控件应当放在宿主中
+ */
 public class UsePluginViewActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     IViewAidlInterface iView;
 
