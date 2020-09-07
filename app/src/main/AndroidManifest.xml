@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.WaveViewActivity"></activity>
+        <activity android:name=".activity.UsePluginFragmentActivity"></activity>
+        <activity android:name=".activity.WaveViewActivity" />
         <activity android:name=".activity.PluginManagerTestActivity" />
         <activity android:name=".activity.ReflexTestActivity" />
         <activity android:name=".MainActivity">
@@ -64,7 +65,7 @@
         </service>
         <service
             android:name=".MainService"
-            android:process=":GuardService"></service>
+            android:process=":GuardService" />
 
         <activity android:name=".activity.TransitActivity" />
         <activity
