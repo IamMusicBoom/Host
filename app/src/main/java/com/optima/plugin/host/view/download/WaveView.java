@@ -169,4 +169,9 @@ public class WaveView extends View {
     public long getMax(){
         return mMax;
     }
+
+    public void reset() {
+        mMax = -1;
+        mProcess = 0;
+    }
 }

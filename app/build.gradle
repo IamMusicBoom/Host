@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('../../repluginlib/ZFY.keystore')
+            keyAlias = 'zft_01'
+            storePassword 'optima61501735'
+            keyPassword 'optima61501735'
+        }
+        debug {
+            storeFile file('../../repluginlib/ZFY.keystore')
+            keyAlias = 'zft_01'
+            storePassword 'optima61501735'
+            keyPassword 'optima61501735'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "30.0.1"
     defaultConfig {

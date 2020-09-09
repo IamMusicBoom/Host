@@ -25,6 +25,8 @@ public class MainApplication extends RePluginApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Add signature to "White List"
+        RePlugin.addCertSignature("FB4124D44BFF4AF077B5A358EAEB89AA");// 添加校验签名文件
         P_Context.setContext(this);
         x.Ext.init(this);
         Intent intent = new Intent(this,MainService.class);
@@ -33,7 +35,6 @@ public class MainApplication extends RePluginApplication {
         }else{
             startService(intent);
         }
-//        RePlugin.registerHookingClass("com.optima.plugin.host.view.download.WaveView", RePlugin.createComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.host.view.download.WaveView"), null);
 
     }
 
@@ -47,6 +48,7 @@ public class MainApplication extends RePluginApplication {
     protected RePluginConfig createConfig() {
         RePluginConfig rePluginConfig = new RePluginConfig();
         rePluginConfig.setUseHostClassIfNotFound(true);
+        rePluginConfig.setVerifySign(true);//添加签名校验
         return rePluginConfig;
     }
 }

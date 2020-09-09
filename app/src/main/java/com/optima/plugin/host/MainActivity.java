@@ -4,8 +4,15 @@ package com.optima.plugin.host;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.optima.plugin.host.activity.BinderTestActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
@@ -39,6 +46,7 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         setNeedCheckPermission(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Logger.d(TAG, "onCreate: " + P_Manager.getPluginVersion(P_Constants.ALIAS_PLUGIN_1));
         boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
         if (pluginRunning) {
             return;
@@ -58,6 +66,7 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         super.onDestroy();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_go_plugin_activity) {// 跳转到插件Activity
@@ -109,6 +118,44 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         } else if (v.getId() == R.id.btn_go_plugin_view) {
             Intent intent = new Intent(MainActivity.this, UsePluginViewActivity.class);
             startActivity(intent);
+        } else if (v.getId() == R.id.btn_go_update_plugin) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    fileNames.add(FILE_NAME_PLUGIN_1);
+//                fileNames.add(FILE_NAME_PLUGIN_2);
+                    P_FileUtil.simulateInstallExternalPlugin(fileNames);
+                }
+            }).start();
+
+        } else if (v.getId() == R.id.btn_go_show_float_window) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
+                startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
+            } else {
+                Intent intent = new Intent();
+                intent.putExtra(P_Constants.INTENT_KEY, "WMA-OK");
+                intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.service.FloatingService"));
+                startService(intent, true);
+            }
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "授权成功", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putExtra(P_Constants.INTENT_KEY, "WMA-OK");
+                intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, "com.optima.plugin.plugin1.service.FloatingService"));
+                startService(intent, true);
+            }
         }
     }
 }
