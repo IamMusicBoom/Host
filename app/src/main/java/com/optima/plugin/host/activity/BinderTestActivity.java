@@ -15,6 +15,7 @@ import com.optima.plugin.host.binder.HostBinderFetcher;
 import com.optima.plugin.host.module.User;
 import com.optima.plugin.host.utils.H_Binder;
 import com.optima.plugin.repluginlib.Logger;
+import com.optima.plugin.repluginlib.pluginUtils.P_Binder;
 import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 import com.optima.plugin.repluginlib.base.BaseActivity;
@@ -41,7 +42,7 @@ public class BinderTestActivity extends BaseActivity implements View.OnClickList
         }else if(v.getId() == R.id.register_host_binder){
             H_Binder.registerHostBinder(new HostBinderFetcher());
         }else if(v.getId() == R.id.register_global_binder){
-            com.optima.plugin.repluginlib.pluginUtils.P_Binder.registerGlobalBinder("globalBinder",new HostBinder());
+            P_Binder.registerGlobalBinder("globalBinder",new HostBinder());
         }else if(v.getId() == R.id.get_plugin_binder){
             IBinder plugin1Binder = com.optima.plugin.repluginlib.pluginUtils.P_Binder.getPluginBinder(P_Constants.ALIAS_PLUGIN_1, "plugin1Binder");
             IHostImpl iHost = IHostImpl.Stub.asInterface(plugin1Binder);

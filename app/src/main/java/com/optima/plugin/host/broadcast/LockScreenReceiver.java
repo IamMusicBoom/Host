@@ -18,6 +18,7 @@ public class LockScreenReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Logger.d(TAG, "onReceive: action = " + intent.getAction());
         if (intent != null) {
             String action = intent.getAction();
             if (Intent.ACTION_SCREEN_ON.equals(action)) {// 屏幕点亮

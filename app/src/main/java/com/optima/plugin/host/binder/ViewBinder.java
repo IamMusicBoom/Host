@@ -2,10 +2,10 @@ package com.optima.plugin.host.binder;
 
 import android.os.RemoteException;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.optima.plugin.host.IViewAidlInterface;
-import com.optima.plugin.host.view.TestTextView;
 import com.optima.plugin.host.view.download.WaveView;
 import com.optima.plugin.repluginlib.Logger;
 
@@ -40,7 +40,14 @@ public class ViewBinder extends IViewAidlInterface.Stub {
 
     @Override
     public void startAnim(int resId) throws RemoteException {
-        TestTextView waveView =  view.findViewById(resId);
+        WaveView waveView =  view.findViewById(resId);
         waveView.startAnim();
+    }
+
+
+    @Override
+    public void setImgId(int resId,int imgId) throws RemoteException {
+        ImageView viewById = view.findViewById(resId);
+        viewById.setImageResource(imgId);
     }
 }

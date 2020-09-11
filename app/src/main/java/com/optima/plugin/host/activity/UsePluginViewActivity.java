@@ -2,13 +2,11 @@ package com.optima.plugin.host.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RemoteViews;
 
 import com.optima.plugin.host.IViewAidlInterface;
 import com.optima.plugin.host.binder.HostBinderFetcher;
@@ -40,6 +38,7 @@ public class UsePluginViewActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RePlugin.registerHookingClass("com.optima.plugin.host.view.download.WaveView",RePlugin.createComponentName("main","com.optima.plugin.host.view.download.WaveView"),null);
         ViewGroup group = (ViewGroup) P_Resource.fetchLayoutByName(P_Constants.ALIAS_PLUGIN_1, "provide_layout", null);
         setContentView(group);
         IBinder viewBinder = P_Binder.getPluginBinder(P_Constants.ALIAS_PLUGIN_1, "view_holder");
