@@ -81,6 +81,7 @@
                 <action android:name="ACTION_COMMON_AIDL" />
             </intent-filter>
         </service>
+        <activity android:name=".activity.HomeActivity"/>
     </application>
 
 </manifest>
