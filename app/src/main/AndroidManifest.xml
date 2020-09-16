@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MainApplication"
@@ -20,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UsePluginViewActivity"></activity>
+        <activity android:name=".activity.JobIntentServiceActivity"></activity>
+        <activity android:name=".activity.UsePluginViewActivity" />
         <activity android:name=".activity.UsePluginFragmentActivity" />
         <activity android:name=".activity.WaveViewActivity" />
         <activity android:name=".activity.PluginManagerTestActivity" />
@@ -81,7 +83,12 @@
                 <action android:name="ACTION_COMMON_AIDL" />
             </intent-filter>
         </service>
-        <activity android:name=".activity.HomeActivity"/>
+
+        <activity android:name=".activity.HomeActivity" />
+
+        <service
+            android:name=".service.WorkService"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service>
     </application>
 
 </manifest>

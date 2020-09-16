@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import com.optima.plugin.host.activity.BinderTestActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.HomeActivity;
+import com.optima.plugin.host.activity.JobIntentServiceActivity;
 import com.optima.plugin.host.activity.UsePluginFragmentActivity;
 import com.optima.plugin.host.activity.UsePluginViewActivity;
 import com.optima.plugin.host.activity.WaveViewActivity;
@@ -144,7 +145,11 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         } else if (v.getId() == R.id.btn_go_test_home_page) {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
+        }else if (v.getId() == R.id.btn_go_test_job_intent_service) {
+            Intent intent = new Intent(MainActivity.this, JobIntentServiceActivity.class);
+            startActivity(intent);
         }
+
     }
 
 
