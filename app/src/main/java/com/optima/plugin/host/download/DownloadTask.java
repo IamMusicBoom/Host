@@ -76,8 +76,8 @@ public class DownloadTask {
         this.notificationId = (int) (downloadUrl.length() / 1000 + Math.random() * 100 + 1);
         Logger.d(TAG, "excuse: notificationId = " + notificationId);
         notificationUtils.showNotification(notificationId, notificationBuilder.build());
-        Callback.Cancelable cancelable = download();
-        cancelableHashMap.put(fileName, cancelable);
+        new TaskThread().start();
+
     }
 
 
@@ -108,6 +108,15 @@ public class DownloadTask {
         }
     }
 
+
+    class TaskThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            Callback.Cancelable cancelable = download();
+            cancelableHashMap.put(fileName, cancelable);
+        }
+    }
 
     private Callback.Cancelable download() {
         RequestParams params = new RequestParams(downloadUrl);

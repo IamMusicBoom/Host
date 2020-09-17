@@ -6,6 +6,6 @@ package com.optima.plugin.host.thread;
  */
 public interface TestCallback {
     void start();
-    void loading(int process,int total);
+    void loading(long process,long total);
     void finish();
 }

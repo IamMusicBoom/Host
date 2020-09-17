@@ -15,11 +15,22 @@ public class ThreadTask {
         this.finishListener = finishListener;
     }
 
-    public ThreadTask(String name) {
+    public ThreadTask(String name,String downloadUrl) {
         this.name = name;
+        this.downloadUrl = downloadUrl;
     }
 
     private String name;
+
+    private String downloadUrl;
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
 
     public String getName() {
         return name;
@@ -29,18 +40,20 @@ public class ThreadTask {
         this.name = name;
     }
 
+
+
     /**
      * 执行线程
      */
     public void start() {
-        TestTask task = new TestTask(new TestCallback() {
+        TestTask task = new TestTask(downloadUrl,name,new TestCallback() {
             @Override
             public void start() {
                 Logger.d(TAG, "start: name = " + name);
             }
 
             @Override
-            public void loading(int process, int total) {
+            public void loading(long process, long total) {
 //                Logger.d(TAG, "loading: name = " + name + "  : " + process + "/" + total);
             }
 
