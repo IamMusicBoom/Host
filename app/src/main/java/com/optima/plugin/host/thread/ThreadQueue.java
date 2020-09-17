@@ -60,7 +60,7 @@ public class ThreadQueue {
                                     String name1 = task.getName();
                                     task = null;
                                     tasks.put(name1, task);
-                                    if (runningCount < 3) {
+                                    if (runningCount < mMaxThreadCount) {
                                         ThreadQueue.this.notify();
                                     }
                                     if (runningCount == 0) {
