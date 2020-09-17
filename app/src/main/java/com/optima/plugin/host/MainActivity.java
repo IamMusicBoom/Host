@@ -18,6 +18,7 @@ import com.optima.plugin.host.activity.BinderTestActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.HomeActivity;
 import com.optima.plugin.host.activity.JobIntentServiceActivity;
+import com.optima.plugin.host.activity.ThreadPoolActivity;
 import com.optima.plugin.host.activity.UsePluginFragmentActivity;
 import com.optima.plugin.host.activity.UsePluginViewActivity;
 import com.optima.plugin.host.activity.WaveViewActivity;
@@ -147,6 +148,9 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             startActivity(intent);
         }else if (v.getId() == R.id.btn_go_test_job_intent_service) {
             Intent intent = new Intent(MainActivity.this, JobIntentServiceActivity.class);
+            startActivity(intent);
+        }else if (v.getId() == R.id.btn_go_test_thread_pool) {
+            Intent intent = new Intent(MainActivity.this, ThreadPoolActivity.class);
             startActivity(intent);
         }
 

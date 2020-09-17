@@ -160,7 +160,6 @@ public class WaveView extends View {
         pointB.y = mProcess;
         controlB.y = mCenterY + mWaveHeight - mProcess;
         pointC.y = mProcess;
-        Logger.d(TAG, "updateProcess: mProcess = " + mProcess + " mHeight = " + mHeight + " " + (mProcess == mHeight && mWaveAnim != null && mWaveAnim.isRunning()));
         invalidate();
     }
 

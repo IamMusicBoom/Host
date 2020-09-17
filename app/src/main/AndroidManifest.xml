@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.JobIntentServiceActivity"></activity>
+        <activity android:name=".activity.ThreadPoolActivity"></activity>
+        <activity android:name=".activity.JobIntentServiceActivity" />
         <activity android:name=".activity.UsePluginViewActivity" />
         <activity android:name=".activity.UsePluginFragmentActivity" />
         <activity android:name=".activity.WaveViewActivity" />
@@ -88,7 +89,7 @@
 
         <service
             android:name=".service.WorkService"
-            android:permission="android.permission.BIND_JOB_SERVICE"></service>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
