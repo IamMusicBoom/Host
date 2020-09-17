@@ -1,6 +1,6 @@
 package com.optima.plugin.host.thread;
 
-import com.optima.plugin.repluginlib.download.DownloadTask;
+import com.optima.plugin.host.download.DownloadTask;
 
 /**
  * create by wma
