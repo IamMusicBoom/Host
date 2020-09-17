@@ -44,17 +44,19 @@ public class DownloadActivity extends BaseActivity implements View.OnClickListen
         img = findViewById(R.id.img);
         waveView = findViewById(R.id.wave_view);
     }
+
     DownloadTask task1;
     DownloadTask task2;
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_start_download) {// 开始下载
 
-            task1 = new DownloadTask(this);
-            task1.excuse(pluginName1, netUrl1);
+            task1 = new DownloadTask(pluginName1, netUrl1, this);
+            task1.excuse();
 
-            task2 = new DownloadTask(this);
-            task2.excuse(pluginName2, netUrl2);
+            task2 = new DownloadTask(pluginName2, netUrl2, this);
+            task2.excuse();
 //            NotificationUtils notificationUtils = new NotificationUtils();
 //            NotificationCompat.Builder notificationBuilder = notificationBuilder = notificationUtils.createDownloadBuilder(100, 0);
 //            notificationUtils.showNotification(250, notificationBuilder.build());
