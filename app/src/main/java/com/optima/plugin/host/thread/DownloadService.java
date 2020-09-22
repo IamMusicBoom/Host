@@ -49,7 +49,7 @@ public class DownloadService extends Service {
         downloadQueue = new DownloadQueue(5);
         AssetManager assets = getResources().getAssets();
         try {
-            InputStream open = assets.open("json.txt");
+            InputStream open = assets.open("json2.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(open));
             Gson gson = new Gson();
             List<Icon> icons = gson.fromJson(reader, new TypeToken<List<Icon>>() {

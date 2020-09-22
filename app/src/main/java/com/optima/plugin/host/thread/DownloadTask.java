@@ -26,12 +26,17 @@ public class DownloadTask {
     /**
      * 下载图标的文件夹名字
      */
-    private static final String ICON_FOLDER = "icon";// 下载图标
+    public static final String ICON_FOLDER = "icon";// 下载图标
 
     /**
      * 下载插件的文件夹名字
      */
-    private static final String PLUGIN_FOLDER = "plugin";// 下载插件
+    public static final String PLUGIN_FOLDER = "plugin";// 下载插件
+
+    /**
+     * 下载插件的文件夹名字
+     */
+    public static final String HOST_FOLDER = "host";// 下载宿主
 
     /**
      * 任务完成的监听
@@ -69,6 +74,14 @@ public class DownloadTask {
      */
     private int mNotificationId;
 
+    /**
+     * 下载文件的类型
+     * 图标 {@link DownloadTask#ICON_FOLDER}
+     * 插件 {@link DownloadTask#PLUGIN_FOLDER}
+     * 宿主 {@link DownloadTask#HOST_FOLDER}
+     */
+    private String mCurType;
+
     public void addFinishListener(TaskFinishListener finishListener) {
         this.mFinishListener = finishListener;
     }
@@ -98,6 +111,18 @@ public class DownloadTask {
     }
 
     /**
+     * 创建一个下载宿主APK的任务
+     *
+     * @param name
+     * @param downloadUrl
+     * @return
+     */
+    public static DownloadTask downloadHost(String name, String downloadUrl) {
+        DownloadTask downloadTask = new DownloadTask(name, downloadUrl, HOST_FOLDER);
+        return downloadTask;
+    }
+
+    /**
      * 创建一个下载文件任务
      *
      * @param name
@@ -112,6 +137,7 @@ public class DownloadTask {
     private DownloadTask(String name, String downloadUrl, String fileType) {
         this.name = name;
         this.downloadUrl = downloadUrl;
+        this.mCurType = fileType;
         SAVE_PAH = P_Context.getContext().getExternalFilesDir(fileType) + File.separator + name;
         if (!ICON_FOLDER.equals(fileType)) {// 只要不是图标下载，都显示通知栏
             mNotificationUtils = new NotificationUtils();
@@ -221,5 +247,9 @@ public class DownloadTask {
 
     public void setCancel(boolean cancel) {
         isCancel = cancel;
+    }
+
+    public String getCurType() {
+        return mCurType;
     }
 }

@@ -3,7 +3,6 @@ package com.optima.plugin.host.thread;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
@@ -23,10 +22,12 @@ import androidx.fragment.app.DialogFragment;
 import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
 
+import java.util.List;
+
 /**
  * create by wma
  * on 2020/9/22 0022
- *
+ * <p>
  * 下载插件，下载宿主 提示框
  */
 public class DownloadDialog extends DialogFragment implements View.OnClickListener {
@@ -34,7 +35,7 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
     private static final int DOWNLOAD_HOST = 0;
     private static final int DOWNLOAD_PLUGIN = 1;
     private TextView mNegativeBtn, mPositiveBtn, mTitleTv, mMessageTv;
-// ---------------------------------------------------------- 设置对话框的点击回调  start
+    // ---------------------------------------------------------- 设置对话框的点击回调  start
     //    private DialogClickListener mListener;
 // ---------------------------------------------------------- 设置对话框的点击回调  end
     private String mTitle, mMessage;
@@ -109,7 +110,9 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
 //            }
 // ---------------------------------------------------------- 设置对话框的点击回调  end
             dismiss();
-            mDownloadService.cancelTask();
+            if (mDownloadService != null) {
+                mDownloadService.cancelTask();
+            }
         } else if (v == mPositiveBtn) {
 // ---------------------------------------------------------- 设置对话框的点击回调  start
 
@@ -117,7 +120,7 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
 //                mListener.onPositiveClick(v);
 //            }
 // ---------------------------------------------------------- 设置对话框的点击回调  end
-            if(mCurType == DOWNLOAD_HOST){
+            if (mCurType == DOWNLOAD_HOST) {
                 startDownload(getActivity());
             }
 
@@ -180,9 +183,20 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
         }
 
         @Override
-        public void onFinish() {
-            Logger.d(TAG, "onFinish: ");
-            dismiss();
+        public void onFinish(List<FileModule> fileModules) {
+            setMessage("资源解析中，请稍后...");
+            new HandleDownloadFileTask(fileModules, new HandleDownloadFileTask.HandleFinishListener() {
+                @Override
+                public void handleError(String error) {
+
+                }
+
+                @Override
+                public void handleFinish() {
+                    dismiss();
+                }
+            }).start();
+
         }
 
         @Override
@@ -205,9 +219,14 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
     @Override
     public void onDestroy() {
         Logger.d(TAG, "onDestroy: ");
-        getActivity().finish();
-        getActivity().unbindService(conn);
-        mDownloadService.stopSelf();
+        try {
+            getActivity().finish();
+            mDownloadService.stopSelf();
+            getActivity().unbindService(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.d(TAG, "catch onDestroy: 服务还没有绑定");
+        }
         super.onDestroy();
     }
 

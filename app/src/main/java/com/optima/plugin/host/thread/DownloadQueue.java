@@ -2,7 +2,9 @@ package com.optima.plugin.host.thread;
 
 import com.optima.plugin.repluginlib.Logger;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * create by wma
@@ -36,6 +38,11 @@ public class DownloadQueue {
      * 下载任务集合
      */
     private LinkedHashMap<String, DownloadTask> mTasks = new LinkedHashMap<>();
+
+    /**
+     * 下载完毕后的封装file对象
+     */
+    private List<FileModule> mDownloadFile = new ArrayList<>();
 
     /**
      * 下载进度监听器
@@ -126,6 +133,7 @@ public class DownloadQueue {
                             @Override
                             public void finish(DownloadTask task) {
                                 synchronized (DownloadQueue.this) {
+                                    mDownloadFile.add(new FileModule(task.getName(),task.getFilePath(),task.getCurType()));
                                     mCur++;
                                     if (processListener != null) {
                                         processListener.onProcess(mCur, mTotal);
@@ -140,7 +148,7 @@ public class DownloadQueue {
                                     if (mRunningCount == 0) {// 说明任务执行完毕
                                         mTasks.clear();
                                         if (processListener != null) {
-                                            processListener.onFinish();
+                                            processListener.onFinish(mDownloadFile);
                                         }
                                     }
                                 }

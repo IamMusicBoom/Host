@@ -1,5 +1,7 @@
 package com.optima.plugin.host.thread;
 
+import java.util.List;
+
 /**
  * create by wma
  * on 2020/9/22 0022
@@ -12,5 +14,5 @@ public interface ProcessListener {
 
     void cancel();// 取消下载
 
-    void onFinish();// 完成下载
+    void onFinish(List<FileModule> fileModules);// 完成下载
 }
