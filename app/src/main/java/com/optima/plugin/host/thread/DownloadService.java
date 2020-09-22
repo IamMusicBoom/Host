@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.optima.plugin.host.R;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.module.Icon;
 import com.optima.plugin.repluginlib.utils.NotificationUtils;
@@ -25,9 +26,10 @@ import java.util.List;
 /**
  * create by wma
  * on 2020/9/21 0021
+ * 下载服务，接口请求服务，主要做宿主版本验证，宿主APK下载，插件配置清单接口请求，插件配置清单下载
  */
 public class DownloadService extends Service {
-    final String TAG = DownloadService.class.getSimpleName();
+    public static final String TAG = DownloadService.class.getSimpleName();
     public DownloadQueue downloadQueue;
     private NotificationUtils notificationUtils;
     @Override
@@ -38,6 +40,7 @@ public class DownloadService extends Service {
             notificationUtils = new NotificationUtils();
             NotificationCompat.Builder importanceBuilder = notificationUtils.createImportanceBuilder();
             importanceBuilder.setGroup(TAG);
+            importanceBuilder.setSmallIcon(R.mipmap.ic_download);
             importanceBuilder.setGroupSummary(true);
             importanceBuilder.setContentTitle("正在下载");
             importanceBuilder.setContentText("请稍后，正在下载");
@@ -46,14 +49,21 @@ public class DownloadService extends Service {
         downloadQueue = new DownloadQueue(5);
         AssetManager assets = getResources().getAssets();
         try {
-            InputStream open = assets.open("json2.txt");
+            InputStream open = assets.open("json.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(open));
             Gson gson = new Gson();
             List<Icon> icons = gson.fromJson(reader, new TypeToken<List<Icon>>() {
             }.getType());
             for (int i = 0; i < icons.size(); i++) {
                 Icon icon = icons.get(i);
-                downloadQueue.addTask(DownloadTask.downloadIcon(icon.getName(), icon.getPath()));
+                String name = icon.getName();
+                String[] split = name.split("\\.");
+                if(split[1].equalsIgnoreCase("jpg")){
+                    downloadQueue.addTask(DownloadTask.downloadIcon(icon.getName(), icon.getPath()));
+                }else{
+                    downloadQueue.addTask(DownloadTask.downloadPlugin(icon.getName(), icon.getPath()));
+
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

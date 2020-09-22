@@ -1,21 +1,45 @@
 package com.optima.plugin.host.thread;
 
 import com.optima.plugin.repluginlib.Logger;
-import com.qihoo360.replugin.helper.LogDebug;
 
 import java.util.LinkedHashMap;
 
 /**
  * create by wma
  * on 2020/9/17 0017
+ *
+ * 下载队列，保证线程并发量
  */
 public class DownloadQueue {
     final String TAG = DownloadQueue.class.getSimpleName();
-    private int runningCount;
+    /**
+     * 正在跑的线程数量
+     */
+    private int mRunningCount;
+
+    /**
+     * 最大线程数
+     */
     private int mMaxThreadCount = 3;
-    private int total = 0;
-    private int cur = 0;
-    private LinkedHashMap<String, DownloadTask> tasks = new LinkedHashMap<>();
+
+    /**
+     * 任务总数
+     */
+    private int mTotal = 0;
+
+    /**
+     * 当前已经下载的任务数
+     */
+    private int mCur = 0;
+
+    /**
+     * 下载任务集合
+     */
+    private LinkedHashMap<String, DownloadTask> mTasks = new LinkedHashMap<>();
+
+    /**
+     * 下载进度监听器
+     */
     private ProcessListener processListener;
 
     public void addOnProcessListener(ProcessListener processListener) {
@@ -26,17 +50,28 @@ public class DownloadQueue {
         this.mMaxThreadCount = maxThreadCount;
     }
 
+    /**
+     * 添加任务
+     * @param task
+     */
     public void addTask(DownloadTask task) {
-        tasks.put(task.getName(), task);
+        mTasks.put(task.getName(), task);
     }
 
+    /**
+     * 任务总数
+     * @return
+     */
     public int taskCount() {
-        return tasks.size();
+        return mTasks.size();
     }
 
+    /**
+     * 执行下载任务
+     */
     public void excuse() {
-        total = taskCount();
-        if (total <= 0) {
+        mTotal = taskCount();
+        if (mTotal <= 0) {
             Logger.e(TAG, "excuse: 执行失败，没有任务");
             return;
         }
@@ -44,9 +79,12 @@ public class DownloadQueue {
         workThread.start();
     }
 
+    /**
+     * 取消任务
+     */
     public void cancel() {
-        for (String key : tasks.keySet()) {
-            DownloadTask downloadTask = tasks.get(key);
+        for (String key : mTasks.keySet()) {
+            DownloadTask downloadTask = mTasks.get(key);
             if (downloadTask != null) {
                 if(downloadTask.getCancelable()!=null){
                     Logger.d(TAG, "cancelTask: " + downloadTask.getName());
@@ -62,6 +100,9 @@ public class DownloadQueue {
         }
     }
 
+    /**
+     * 工作线程
+     */
     class WorkThread extends Thread {
         @Override
         public void run() {
@@ -70,34 +111,34 @@ public class DownloadQueue {
                 if (processListener != null) {
                     processListener.onStart();
                 }
-                for (String name : tasks.keySet()) {
-                    runningCount++;
-                    if (runningCount > mMaxThreadCount) {
+                for (String name : mTasks.keySet()) {
+                    mRunningCount++;
+                    if (mRunningCount > mMaxThreadCount) {
                         try {
                             DownloadQueue.this.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                    DownloadTask task = tasks.get(name);
+                    DownloadTask task = mTasks.get(name);
                     if (task != null) {
                         task.addFinishListener(new TaskFinishListener() {
                             @Override
                             public void finish(DownloadTask task) {
                                 synchronized (DownloadQueue.this) {
-                                    cur++;
+                                    mCur++;
                                     if (processListener != null) {
-                                        processListener.onProcess(cur, total);
+                                        processListener.onProcess(mCur, mTotal);
                                     }
-                                    runningCount--;
+                                    mRunningCount--;
                                     String name1 = task.getName();
                                     task = null;
-                                    tasks.put(name1, task);
-                                    if (runningCount < mMaxThreadCount) {
+                                    mTasks.put(name1, task);
+                                    if (mRunningCount < mMaxThreadCount) {
                                         DownloadQueue.this.notify();
                                     }
-                                    if (runningCount == 0) {
-                                        tasks.clear();
+                                    if (mRunningCount == 0) {// 说明任务执行完毕
+                                        mTasks.clear();
                                         if (processListener != null) {
                                             processListener.onFinish();
                                         }
@@ -105,7 +146,7 @@ public class DownloadQueue {
                                 }
                             }
                         });
-                        if(!task.isCancel()){
+                        if(!task.isCancel()){// 为保证取消后不继续执行任务，需要先判断是否已经取消该任务
                             Logger.d(TAG, "开始下载: " + task.getName());
                             task.start();
                         }

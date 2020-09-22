@@ -1,7 +1,12 @@
 package com.optima.plugin.host.thread;
 
+import android.app.Notification;
+
+import androidx.core.app.NotificationCompat;
+
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
+import com.optima.plugin.repluginlib.utils.NotificationUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -12,17 +17,57 @@ import java.io.File;
 /**
  * create by wma
  * on 2020/9/17 0017
+ * 下载任务
  */
 public class DownloadTask {
     private final String TAG = DownloadTask.class.getSimpleName();
     private Callback.Cancelable cancelable;
+
+    /**
+     * 下载图标的文件夹名字
+     */
     private static final String ICON_FOLDER = "icon";// 下载图标
+
+    /**
+     * 下载插件的文件夹名字
+     */
     private static final String PLUGIN_FOLDER = "plugin";// 下载插件
 
+    /**
+     * 任务完成的监听
+     */
     private TaskFinishListener mFinishListener;
+
+    /**
+     * 下载文件的储存的路径
+     */
     private final String SAVE_PAH;
+
+    /**
+     * 任务是否取消的标志
+     */
     private boolean isCancel;
 
+    /**
+     * 储存在文件夹里面的文件名字
+     */
+    private String name;
+
+    /**
+     * 下载文件的网络全路径
+     */
+    private String downloadUrl;
+
+    /**
+     * 通知栏显示，在下载apk或者插件的时候才会显示，下载图标，或者小文件的时候不应该有。
+     */
+    private NotificationUtils mNotificationUtils;
+    private NotificationCompat.Builder mDownloadBuilder;
+
+    /**
+     * 每个任务的通知栏id，需要根据id更新或者取消
+     */
+    private int mNotificationId;
 
     public void addFinishListener(TaskFinishListener finishListener) {
         this.mFinishListener = finishListener;
@@ -68,17 +113,25 @@ public class DownloadTask {
         this.name = name;
         this.downloadUrl = downloadUrl;
         SAVE_PAH = P_Context.getContext().getExternalFilesDir(fileType) + File.separator + name;
+        if (!ICON_FOLDER.equals(fileType)) {// 只要不是图标下载，都显示通知栏
+            mNotificationUtils = new NotificationUtils();
+            mDownloadBuilder = mNotificationUtils.createDownloadBuilder(100, 0);
+            mDownloadBuilder.setGroup(DownloadService.TAG);
+            mDownloadBuilder.setContentText("正在下载...");
+            mDownloadBuilder.setContentTitle(this.name);
+        }
     }
-
-    private String name;
-
-    private String downloadUrl;
 
 
     /**
-     * 执行线程
+     * 执行线程，开启任务
+     * note:该方法在子线程中执行
      */
     public void start() {
+        if (mNotificationUtils != null) {
+            mNotificationId = (int) (downloadUrl.length() / 1000 + Math.random() * 100);
+            mNotificationUtils.showNotification(mNotificationId, mDownloadBuilder.build());
+        }
         download();
     }
 
@@ -89,6 +142,9 @@ public class DownloadTask {
             @Override
             public void onSuccess(File result) {
                 Logger.d(TAG, "onSuccess: path = " + result.getAbsolutePath());
+                if (mNotificationUtils != null) {
+                    mNotificationUtils.cancelNotification(mNotificationId);
+                }
             }
 
             @Override
@@ -119,7 +175,9 @@ public class DownloadTask {
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-
+                if (mNotificationUtils != null) {
+                    mNotificationUtils.updateDownloadNotification(mNotificationId, 100, (int) ((current * 100) / total), mDownloadBuilder);
+                }
             }
         });
         return cancelable;

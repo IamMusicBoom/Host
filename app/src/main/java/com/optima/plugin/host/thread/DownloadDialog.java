@@ -26,13 +26,17 @@ import com.optima.plugin.repluginlib.Logger;
 /**
  * create by wma
  * on 2020/9/22 0022
+ *
+ * 下载插件，下载宿主 提示框
  */
 public class DownloadDialog extends DialogFragment implements View.OnClickListener {
     public static final String TAG = DownloadDialog.class.getSimpleName();
     private static final int DOWNLOAD_HOST = 0;
     private static final int DOWNLOAD_PLUGIN = 1;
     private TextView mNegativeBtn, mPositiveBtn, mTitleTv, mMessageTv;
-    private DialogClickListener mListener;
+// ---------------------------------------------------------- 设置对话框的点击回调  start
+    //    private DialogClickListener mListener;
+// ---------------------------------------------------------- 设置对话框的点击回调  end
     private String mTitle, mMessage;
     private int mCurType;
     private DownloadService.DownloadBinder binder;
@@ -81,13 +85,6 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
         mPositiveBtn.setOnClickListener(this);
         mMessageTv.setText(mMessage);
         mTitleTv.setText(mTitle);
-        getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                Logger.d(TAG, "onDismiss: ");
-                DownloadDialog.this.getActivity().finish();
-            }
-        });
     }
 
     @Override
@@ -103,15 +100,25 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == mNegativeBtn) {
-            if (mListener != null) {
-                mListener.onNegativeClick(v);
-            } else {
-                dismiss();
-                mDownloadService.cancelTask();
-            }
+// ---------------------------------------------------------- 设置对话框的点击回调  start
+//            if (mListener != null) {
+//                mListener.onNegativeClick(v);
+//            } else {
+//                dismiss();
+//                mDownloadService.cancelTask();
+//            }
+// ---------------------------------------------------------- 设置对话框的点击回调  end
+            dismiss();
+            mDownloadService.cancelTask();
         } else if (v == mPositiveBtn) {
-            if (mListener != null) {
-                mListener.onPositiveClick(v);
+// ---------------------------------------------------------- 设置对话框的点击回调  start
+
+//            if (mListener != null) {
+//                mListener.onPositiveClick(v);
+//            }
+// ---------------------------------------------------------- 设置对话框的点击回调  end
+            if(mCurType == DOWNLOAD_HOST){
+                startDownload(getActivity());
             }
 
         }
@@ -204,14 +211,16 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
         super.onDestroy();
     }
 
-    public void setOnDialogClickListener(DialogClickListener listener) {
-        this.mListener = listener;
-    }
+// ---------------------------------------------------------- 设置对话框的点击回调  start
+//    public void setOnDialogClickListener(DialogClickListener listener) {
+//        this.mListener = listener;
+//    }
 
-    public interface DialogClickListener {
-        void onNegativeClick(View view);
-
-        void onPositiveClick(View view);
-    }
+//    public interface DialogClickListener {
+//        void onNegativeClick(View view);
+//
+//        void onPositiveClick(View view);
+//    }
+// ---------------------------------------------------------- 设置对话框的点击回调  end
 
 }

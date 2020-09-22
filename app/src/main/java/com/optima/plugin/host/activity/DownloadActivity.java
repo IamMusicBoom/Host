@@ -36,9 +36,11 @@ public class DownloadActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_download);
-        downloadDialog = DownloadDialog.createDownloadPlugin();
+//        downloadDialog = DownloadDialog.createDownloadPlugin();
+        downloadDialog = DownloadDialog.createDownloadHostDialog();
         downloadDialog.show(getSupportFragmentManager(), DownloadDialog.TAG);
-        downloadDialog.startDownload(DownloadActivity.this);
+//        downloadDialog.startDownload(DownloadActivity.this);
+
     }
 
 
