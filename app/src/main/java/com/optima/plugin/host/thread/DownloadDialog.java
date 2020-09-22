@@ -33,6 +33,7 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
     public static DownloadDialog newInstance(String title, String message, Bundle bundle) {
         DownloadDialog dialog = new DownloadDialog(title, message);
         dialog.setArguments(bundle);
+        dialog.setCancelable(false);
         return dialog;
     }
 
@@ -52,6 +53,8 @@ public class DownloadDialog extends DialogFragment implements View.OnClickListen
         super.onActivityCreated(savedInstanceState);
         mNegativeBtn.setOnClickListener(this);
         mPositiveBtn.setOnClickListener(this);
+        mMessageTv.setText(mMessage);
+        mTitleTv.setText(mTitle);
     }
 
     @Override

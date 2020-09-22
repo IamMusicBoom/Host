@@ -16,7 +16,7 @@ public class DownloadQueue {
     private int cur = 0;
     private LinkedHashMap<String, DownloadTask> tasks = new LinkedHashMap<>();
     private ProcessListener processListener;
-
+    private  WorkThread workThread;
     public void addOnProcessListener(ProcessListener processListener) {
         this.processListener = processListener;
     }
@@ -39,7 +39,25 @@ public class DownloadQueue {
             Logger.e(TAG, "excuse: 执行失败，没有任务");
             return;
         }
-        new WorkThread().start();
+
+        workThread = new WorkThread();
+        workThread.start();
+    }
+
+    public void cancel() {
+        if (processListener!=null) {
+            processListener.cancel();
+        }
+        for (String key : tasks.keySet()) {
+            DownloadTask downloadTask = tasks.get(key);
+            if(downloadTask != null){
+                Logger.d(TAG, "cancelTask: " + downloadTask.getName());
+                downloadTask.cancel();
+            }else{
+                Logger.d(TAG, "cancelTask: " + downloadTask);
+            }
+
+        }
     }
 
     class WorkThread extends Thread {
@@ -88,10 +106,11 @@ public class DownloadQueue {
                         });
                         task.start();
                     } else {
-
+                        Logger.e(TAG, "run: task = null");
                     }
                 }
             }
         }
     }
+
 }

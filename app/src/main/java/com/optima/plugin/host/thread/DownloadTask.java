@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class DownloadTask {
     private final String TAG = DownloadTask.class.getSimpleName();
-
+    Callback.Cancelable cancelable;
     public static final String ICON_FOLDER = "icon";// 下载图标
     public static final String PLUGIN_FOLDER = "plugin";// 下载插件
 
@@ -28,6 +28,7 @@ public class DownloadTask {
 
     /**
      * 创建一个下载icon的任务
+     *
      * @param name
      * @param downloadUrl
      * @return
@@ -39,22 +40,24 @@ public class DownloadTask {
 
     /**
      * 创建一个下载插件的任务
+     *
      * @param name
      * @param downloadUrl
      * @return
      */
-    public static DownloadTask downloadPlugin(String name, String downloadUrl){
+    public static DownloadTask downloadPlugin(String name, String downloadUrl) {
         DownloadTask downloadTask = new DownloadTask(name, downloadUrl, PLUGIN_FOLDER);
         return downloadTask;
     }
 
     /**
      * 创建一个下载文件任务
+     *
      * @param name
      * @param downloadUrl
      * @return
      */
-    public static DownloadTask downloadFile(String name, String downloadUrl,String folderName){
+    public static DownloadTask downloadFile(String name, String downloadUrl, String folderName) {
         DownloadTask downloadTask = new DownloadTask(name, downloadUrl, folderName);
         return downloadTask;
     }
@@ -80,7 +83,7 @@ public class DownloadTask {
     private Callback.Cancelable download() {
         RequestParams params = new RequestParams(downloadUrl);
         params.setSaveFilePath(SAVE_PAH);
-        Callback.Cancelable cancelable = x.http().get(params, new Callback.ProgressCallback<File>() {
+        cancelable = x.http().get(params, new Callback.ProgressCallback<File>() {
             @Override
             public void onSuccess(File result) {
 
@@ -138,5 +141,12 @@ public class DownloadTask {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void cancel() {
+        if (cancelable != null) {
+            cancelable.cancel();
+            cancelable = null;
+        }
     }
 }

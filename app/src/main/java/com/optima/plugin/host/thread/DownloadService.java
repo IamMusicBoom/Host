@@ -23,19 +23,18 @@ import java.util.List;
  * create by wma
  * on 2020/9/21 0021
  */
-public class DownloadService extends Service implements ProcessListener {
+public class DownloadService extends Service {
     final String TAG = DownloadService.class.getSimpleName();
-    DownloadQueue downloadQueue;
+    public DownloadQueue downloadQueue;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Logger.d(TAG, "onCreate: ");
         downloadQueue = new DownloadQueue(5);
-        downloadQueue.addOnProcessListener(this);
         AssetManager assets = getResources().getAssets();
         try {
-            InputStream open = assets.open("json2.txt");
+            InputStream open = assets.open("json.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(open));
             Gson gson = new Gson();
             List<Icon> icons = gson.fromJson(reader, new TypeToken<List<Icon>>() {
@@ -51,7 +50,7 @@ public class DownloadService extends Service implements ProcessListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        downloadQueue.excuse();
+        startTask();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -59,7 +58,7 @@ public class DownloadService extends Service implements ProcessListener {
     @Override
     public IBinder onBind(Intent intent) {
         Logger.d(TAG, "onBind: ");
-        downloadQueue.excuse();
+        startTask();
         return new DownloadBinder();
     }
 
@@ -75,21 +74,22 @@ public class DownloadService extends Service implements ProcessListener {
         super.onDestroy();
     }
 
-    @Override
-    public void onStart() {
-        Logger.d(TAG, "onStart: ");
+    /**
+     * 取消任务
+     */
+    public void cancelTask() {
+        downloadQueue.cancel();
     }
 
-    @Override
-    public void onFinish() {
-        Logger.d(TAG, "onFinish: ");
+    public void startTask(){
+        downloadQueue.excuse();
     }
 
-    @Override
-    public void onProcess(int cur, int total) {
-        Logger.d(TAG, "onProcess: " + cur + "/" + total);
-    }
 
     public class DownloadBinder extends Binder {
+        public DownloadService getService(ProcessListener processListener) {
+            downloadQueue.addOnProcessListener(processListener);
+            return DownloadService.this;
+        }
     }
 }

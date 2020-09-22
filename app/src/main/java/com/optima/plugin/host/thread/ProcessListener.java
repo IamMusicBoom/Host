@@ -6,6 +6,7 @@ package com.optima.plugin.host.thread;
  */
 public interface ProcessListener {
     void onStart();
-    void onFinish();
     void onProcess(int cur,int total);
+    void cancel();
+    void onFinish();
 }

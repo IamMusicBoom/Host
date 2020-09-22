@@ -15,6 +15,7 @@ import com.optima.plugin.host.adapter.DownloadImgAdapter;
 import com.optima.plugin.host.thread.DownloadDialog;
 import com.optima.plugin.host.thread.DownloadService;
 import com.optima.plugin.host.thread.DownloadTask;
+import com.optima.plugin.host.thread.ProcessListener;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.optima.plugin.repluginlib.module.Icon;
@@ -33,6 +34,7 @@ public class DownloadActivity extends BaseActivity implements View.OnClickListen
     List<Icon> icons = new ArrayList<>();
     DownloadDialog downloadDialog;
     DownloadService.DownloadBinder binder;
+    DownloadService downloadService;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class DownloadActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onNegativeClick(View view) {
         Logger.d(TAG, "onNegativeClick: 取消按钮");
+        downloadService.cancelTask();
         downloadDialog.dismiss();
     }
 
@@ -74,17 +77,45 @@ public class DownloadActivity extends BaseActivity implements View.OnClickListen
 
     DownloadServiceConnection conn = new DownloadServiceConnection();
 
-    class DownloadServiceConnection implements ServiceConnection {
+    class DownloadServiceConnection implements ServiceConnection, ProcessListener {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
 
             binder = (DownloadService.DownloadBinder) service;
+
+            downloadService = binder.getService(this);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
+        }
+
+        @Override
+        public void onStart() {
+            Logger.d(TAG, "onStart: ");
+        }
+
+        @Override
+        public void onFinish() {
+            Logger.d(TAG, "onFinish: ");
+            unbindService(conn);
+        }
+
+        @Override
+        public void onProcess(int cur, int total) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("资源下载中：");
+            sb.append(cur);
+            sb.append("/");
+            sb.append(total);
+            downloadDialog.setMessage(sb.toString());
+        }
+
+        @Override
+        public void cancel() {
+            Logger.d(TAG, "cancel: ");
         }
     }
 
