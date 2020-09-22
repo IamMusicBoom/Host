@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.optima.plugin.host.activity.BinderTestActivity;
+import com.optima.plugin.host.activity.DOCSelectActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.HomeActivity;
 import com.optima.plugin.host.activity.JobIntentServiceActivity;
@@ -29,6 +30,7 @@ import com.optima.plugin.host.activity.ProviderTestActivity;
 import com.optima.plugin.host.activity.ReflexTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.repluginlib.Logger;
+import com.optima.plugin.repluginlib.TestActivity;
 import com.optima.plugin.repluginlib.pluginUtils.P_Binder;
 import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
@@ -76,7 +78,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.btn_go_plugin_activity) {// 跳转到插件Activity
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
+//            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
+            intent.setComponent(new ComponentName("com.optima.plugin.plugindaily","com.optima.plugin.daily.task.activity.IndexActivity"));
             startActivity(intent, true);
         } else if (v.getId() == R.id.btn_go_plugin_activity_for_result) {// 跳转插件Activity并且有返回值
             Intent intent = new Intent();
@@ -150,7 +153,10 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             Intent intent = new Intent(MainActivity.this, JobIntentServiceActivity.class);
             startActivity(intent);
         }else if (v.getId() == R.id.btn_go_test_thread_pool) {
-            Intent intent = new Intent(MainActivity.this, ThreadPoolActivity.class);
+            Intent intent = new Intent(MainActivity.this, TestActivity.class);
+            startActivity(intent);
+        }else if(v.getId() == R.id.btn_doc_select){
+            Intent intent = new Intent(MainActivity.this, DOCSelectActivity.class);
             startActivity(intent);
         }
 

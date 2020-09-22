@@ -10,10 +10,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.optima.plugin.host.R;
-import com.optima.plugin.host.download.DownloadTask;
-import com.optima.plugin.host.thread.ThreadQueue;
-import com.optima.plugin.host.thread.ThreadTask;
-import com.optima.plugin.repluginlib.Logger;
+import com.optima.plugin.host.thread.DownloadQueue;
+import com.optima.plugin.host.thread.DownloadTask;
 import com.optima.plugin.repluginlib.module.Icon;
 
 import java.io.BufferedReader;
@@ -23,14 +21,14 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class ThreadPoolActivity extends AppCompatActivity implements View.OnClickListener {
-    ThreadQueue queue;
+    DownloadQueue queue;
     TextView taskCountTv;
     List<Icon> icons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_pool);
-        queue = new ThreadQueue(5);
+        queue = new DownloadQueue(5);
         taskCountTv = findViewById(R.id.tv_task_count);
         AssetManager assets = getResources().getAssets();
         try {
@@ -51,7 +49,7 @@ public class ThreadPoolActivity extends AppCompatActivity implements View.OnClic
         if (v.getId() == R.id.btn_add_task) {
             for (int i = 0; i < icons.size(); i++) {
                 Icon icon = icons.get(i);
-                ThreadTask task = new ThreadTask(icon.getName(),icon.getPath());
+                DownloadTask task = DownloadTask.downloadIcon(icon.getName(),icon.getPath());
                 queue.addTask(task);
             }
         } else if (v.getId() == R.id.btn_start_task_queue) {

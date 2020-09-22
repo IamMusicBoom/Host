@@ -90,6 +90,11 @@
         <service
             android:name=".service.WorkService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        
+        <activity android:name=".activity.DOCSelectActivity"/>
+        <service android:name=".thread.DownloadService">
+
+        </service>
     </application>
 
 </manifest>

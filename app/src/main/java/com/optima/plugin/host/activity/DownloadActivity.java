@@ -1,32 +1,25 @@
 package com.optima.plugin.host.activity;
 
-import android.content.res.AssetManager;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.optima.plugin.host.R;
 import com.optima.plugin.host.adapter.DownloadImgAdapter;
-import com.optima.plugin.host.download.CallbackListener;
-import com.optima.plugin.host.download.DownloadTask;
-import com.optima.plugin.host.download.TaskQueue;
+import com.optima.plugin.host.thread.DownloadDialog;
+import com.optima.plugin.host.thread.DownloadService;
+import com.optima.plugin.host.thread.DownloadTask;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.base.BaseActivity;
 import com.optima.plugin.repluginlib.module.Icon;
 
-import org.xutils.common.Callback;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,91 +27,67 @@ import java.util.List;
  * create by wma
  * on 2020/9/1 0001
  */
-public class DownloadActivity extends BaseActivity implements View.OnClickListener, CallbackListener {
-    //    final String netUrl = "http://seopic.699pic.com/photo/50073/8276.jpg_wh1200.jpg";
-//    final String netUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598953251041&di=a710c8d0ef81ac28393751ebd4181499&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fe%2F59ae3a99a20fb.jpg%3Fdown";
+public class DownloadActivity extends BaseActivity implements View.OnClickListener, DownloadDialog.DialogClickListener {
 
     RecyclerView recyclerView;
-    final String netUrl1 = "http://xiazai.suanmiao-zuida.com/2008/BaBai.HD1280%E9%AB%98%E6%B8%85%E5%9B%BD%E8%AF%AD%E4%B8%AD%E5%AD%97%E7%89%88.mp4";
-    final String pluginName1 = "babai.mp4";
-
-    final String pluginName2 = "nezha.mp4";
-    final String netUrl2 = "http://caizi.meizuida.com/1910/NZZMT%E9%99%8D%E4%B8%96.HD1280%E9%AB%98%E6%B8%85%E5%9B%BD%E8%AF%AD%E4%B8%AD%E5%AD%97%E7%89%88.mp4";
-    TaskQueue taskQueue;
-
     List<Icon> icons = new ArrayList<>();
-
+    DownloadDialog downloadDialog;
+    DownloadService.DownloadBinder binder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
         recyclerView = findViewById(R.id.recycler_view);
-        taskQueue = new TaskQueue(5);
-        AssetManager assets = getResources().getAssets();
-        try {
-            InputStream open = assets.open("json.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(open));
-            Gson gson = new Gson();
-            List<Icon> icons = gson.fromJson(reader, new TypeToken<List<Icon>>() {
-            }.getType());
-            Logger.d(TAG, "onCreate: icons.size() = " + icons.size());
-            for (int i = 0; i < icons.size(); i++) {
-                Icon icon = icons.get(i);
-                taskQueue.addTask(new DownloadTask(icon.getName(), icon.getPath(), this));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_start_download) {// 开始下载
-            taskQueue.excuse();
-        } else if (v.getId() == R.id.btn_pause_download) {
-
+            downloadDialog = DownloadDialog.newInstance("请稍等", "资源下载中：", null);
+            downloadDialog.show(getSupportFragmentManager(), DownloadDialog.TAG);
+            downloadDialog.setOnDialogClickListener(this);
         } else if (v.getId() == R.id.btn_show_image) {
             new QueryLocalIcon(false).start();
-//            recyclerView.setAdapter(mAdapter);
         } else if (v.getId() == R.id.btn_delete_image) {
             new QueryLocalIcon(true).start();
+        } else if (v.getId() == R.id.btn_start_download_service) {
+
+        } else if (v.getId() == R.id.btn_stop_download_service) {
+
         }
     }
 
-
     @Override
-    public void onSuccess(File result) {
-
+    public void onNegativeClick(View view) {
+        Logger.d(TAG, "onNegativeClick: 取消按钮");
+        downloadDialog.dismiss();
     }
 
     @Override
-    public void onError(Throwable ex, boolean isOnCallback) {
+    public void onPositiveClick(View view) {
+        Logger.d(TAG, "onNegativeClick: 确定按钮");
+        Intent intent = new Intent(DownloadActivity.this, DownloadService.class);
+        bindService(intent, conn, BIND_AUTO_CREATE);
 
     }
 
-    @Override
-    public void onCancelled(Callback.CancelledException cex) {
+    DownloadServiceConnection conn = new DownloadServiceConnection();
 
+    class DownloadServiceConnection implements ServiceConnection {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+
+            binder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
     }
 
-    @Override
-    public void onFinished() {
-    }
-
-    @Override
-    public void onWaiting() {
-
-    }
-
-    @Override
-    public void onStarted() {
-
-    }
-
-    @Override
-    public void onLoading(long total, long current, boolean isDownloading) {
-    }
 
     class QueryLocalIcon extends Thread {
         boolean isDelete;
@@ -130,7 +99,7 @@ public class DownloadActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void run() {
             super.run();
-            File externalFilesDir = DownloadActivity.this.getExternalFilesDir(DownloadTask.FOLDER_NAME);
+            File externalFilesDir = DownloadActivity.this.getExternalFilesDir(DownloadTask.ICON_FOLDER);
             if (externalFilesDir != null && externalFilesDir.isDirectory()) {
                 File[] files = externalFilesDir.listFiles();
                 if (files != null && files.length > 0) {
