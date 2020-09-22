@@ -77,7 +77,8 @@
             android:name=".view.gesture.LockScreenActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.BinderTestActivity" />
-        <activity android:name=".activity.DownloadActivity" />
+        <activity android:name=".activity.DownloadActivity"
+            android:theme="@style/MyTranslucentTheme"></activity>
 
         <service android:name=".service.CommonAIDLService">
             <intent-filter>

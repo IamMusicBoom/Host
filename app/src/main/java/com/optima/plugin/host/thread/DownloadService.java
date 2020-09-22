@@ -4,14 +4,17 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.module.Icon;
+import com.optima.plugin.repluginlib.utils.NotificationUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,15 +29,24 @@ import java.util.List;
 public class DownloadService extends Service {
     final String TAG = DownloadService.class.getSimpleName();
     public DownloadQueue downloadQueue;
-
+    private NotificationUtils notificationUtils;
     @Override
     public void onCreate() {
         super.onCreate();
         Logger.d(TAG, "onCreate: ");
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            notificationUtils = new NotificationUtils();
+            NotificationCompat.Builder importanceBuilder = notificationUtils.createImportanceBuilder();
+            importanceBuilder.setGroup(TAG);
+            importanceBuilder.setGroupSummary(true);
+            importanceBuilder.setContentTitle("正在下载");
+            importanceBuilder.setContentText("请稍后，正在下载");
+            startForeground(1005,importanceBuilder.build());
+        }
         downloadQueue = new DownloadQueue(5);
         AssetManager assets = getResources().getAssets();
         try {
-            InputStream open = assets.open("json.txt");
+            InputStream open = assets.open("json2.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(open));
             Gson gson = new Gson();
             List<Icon> icons = gson.fromJson(reader, new TypeToken<List<Icon>>() {
@@ -50,7 +62,7 @@ public class DownloadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        startTask();
+        Logger.d(TAG, "onStartCommand: ");
         return super.onStartCommand(intent, flags, startId);
     }
 

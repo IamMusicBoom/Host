@@ -1,5 +1,6 @@
 package com.optima.plugin.host.thread;
 
+import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 
 import org.xutils.common.Callback;
@@ -14,13 +15,14 @@ import java.io.File;
  */
 public class DownloadTask {
     private final String TAG = DownloadTask.class.getSimpleName();
-    Callback.Cancelable cancelable;
-    public static final String ICON_FOLDER = "icon";// 下载图标
-    public static final String PLUGIN_FOLDER = "plugin";// 下载插件
+    private Callback.Cancelable cancelable;
+    private static final String ICON_FOLDER = "icon";// 下载图标
+    private static final String PLUGIN_FOLDER = "plugin";// 下载插件
 
+    private TaskFinishListener mFinishListener;
+    private final String SAVE_PAH;
+    private boolean isCancel;
 
-    TaskFinishListener mFinishListener;
-    final String SAVE_PAH;
 
     public void addFinishListener(TaskFinishListener finishListener) {
         this.mFinishListener = finishListener;
@@ -86,7 +88,7 @@ public class DownloadTask {
         cancelable = x.http().get(params, new Callback.ProgressCallback<File>() {
             @Override
             public void onSuccess(File result) {
-
+                Logger.d(TAG, "onSuccess: path = " + result.getAbsolutePath());
             }
 
             @Override
@@ -144,9 +146,22 @@ public class DownloadTask {
     }
 
     public void cancel() {
+        isCancel = true;
         if (cancelable != null) {
             cancelable.cancel();
             cancelable = null;
         }
+    }
+
+    public Callback.Cancelable getCancelable() {
+        return cancelable;
+    }
+
+    public boolean isCancel() {
+        return isCancel;
+    }
+
+    public void setCancel(boolean cancel) {
+        isCancel = cancel;
     }
 }

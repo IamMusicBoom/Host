@@ -1,6 +1,7 @@
 package com.optima.plugin.host.thread;
 
 import com.optima.plugin.repluginlib.Logger;
+import com.qihoo360.replugin.helper.LogDebug;
 
 import java.util.LinkedHashMap;
 
@@ -16,7 +17,7 @@ public class DownloadQueue {
     private int cur = 0;
     private LinkedHashMap<String, DownloadTask> tasks = new LinkedHashMap<>();
     private ProcessListener processListener;
-    private  WorkThread workThread;
+
     public void addOnProcessListener(ProcessListener processListener) {
         this.processListener = processListener;
     }
@@ -39,24 +40,25 @@ public class DownloadQueue {
             Logger.e(TAG, "excuse: 执行失败，没有任务");
             return;
         }
-
-        workThread = new WorkThread();
+        WorkThread  workThread = new WorkThread();
         workThread.start();
     }
 
     public void cancel() {
-        if (processListener!=null) {
-            processListener.cancel();
-        }
         for (String key : tasks.keySet()) {
             DownloadTask downloadTask = tasks.get(key);
-            if(downloadTask != null){
-                Logger.d(TAG, "cancelTask: " + downloadTask.getName());
+            if (downloadTask != null) {
+                if(downloadTask.getCancelable()!=null){
+                    Logger.d(TAG, "cancelTask: " + downloadTask.getName());
+                }
                 downloadTask.cancel();
-            }else{
+            } else {
                 Logger.d(TAG, "cancelTask: " + downloadTask);
             }
 
+        }
+        if (processListener != null) {
+            processListener.cancel();
         }
     }
 
@@ -100,11 +102,13 @@ public class DownloadQueue {
                                             processListener.onFinish();
                                         }
                                     }
-
                                 }
                             }
                         });
-                        task.start();
+                        if(!task.isCancel()){
+                            Logger.d(TAG, "开始下载: " + task.getName());
+                            task.start();
+                        }
                     } else {
                         Logger.e(TAG, "run: task = null");
                     }
