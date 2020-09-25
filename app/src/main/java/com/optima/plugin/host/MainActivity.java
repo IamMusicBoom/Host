@@ -58,6 +58,7 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         if (pluginRunning) {
             return;
         }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -66,6 +67,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
                 P_FileUtil.simulateInstallExternalPlugin(fileNames);
             }
         }).start();
+        int dasda = P_Manager.getPluginVersion("dasda");
+        Logger.d(TAG, "onCreate: dasda = " + dasda);
     }
 
     @Override

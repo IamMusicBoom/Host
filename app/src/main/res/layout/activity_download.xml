@@ -38,6 +38,12 @@
         android:onClick="onClick"
         android:text="停止下载服务" />
 
+    <com.optima.plugin.host.thread.ProgressView
+        android:id="@+id/process_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"/>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
