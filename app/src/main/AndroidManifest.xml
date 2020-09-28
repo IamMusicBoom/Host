@@ -77,8 +77,8 @@
             android:name=".view.gesture.LockScreenActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.BinderTestActivity" />
-        <activity android:name=".activity.DownloadActivity"
-            android:theme="@style/MyTranslucentTheme"></activity>
+        <activity android:name=".activity.DownloadActivity">
+        </activity>
 
         <service android:name=".service.CommonAIDLService">
             <intent-filter>
@@ -94,8 +94,10 @@
         
         <activity android:name=".activity.DOCSelectActivity"/>
         <service android:name=".thread.DownloadService">
-
         </service>
+        <service android:name=".download.DownloadService"/>
+        <activity android:name=".download.ui.DownloadActivity"
+            android:theme="@style/MyTranslucentTheme"/>
     </application>
 
 </manifest>

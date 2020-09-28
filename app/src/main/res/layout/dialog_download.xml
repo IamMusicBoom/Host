@@ -22,10 +22,22 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/dialog_title"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="#999999"
         android:text="这是消息，主要显示信息"/>
+    <com.optima.plugin.host.download.ui.ProgressView
+        android:id="@+id/dialog_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintTop_toBottomOf="@id/dialog_title"
+        app:layout_constraintBottom_toTopOf="@id/dialog_message"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/dialog_positive"
         android:layout_width="wrap_content"
@@ -44,7 +56,7 @@
         android:id="@+id/dialog_negative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="取消"
+        android:text="忽略"
         android:background="?android:attr/selectableItemBackground"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"

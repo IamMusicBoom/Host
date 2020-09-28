@@ -47,33 +47,33 @@ public class MainApplication extends RePluginApplication {
 
         @Override
         public void onActivityStopped(Activity activity) {
-            Logger.d(TAG, "onActivityStopped: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityStopped: " + activity.getClass().getSimpleName());
         }
 
         @Override
         public void onActivityStarted(Activity activity) {
-            Logger.d(TAG, "onActivityStarted: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityStarted: " + activity.getClass().getSimpleName());
 
         }
 
         @Override
         public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-            Logger.d(TAG, "onActivitySaveInstanceState: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivitySaveInstanceState: " + activity.getClass().getSimpleName());
         }
 
         @Override
         public void onActivityResumed(Activity activity) {
-            Logger.d(TAG, "onActivityResumed: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityResumed: " + activity.getClass().getSimpleName());
         }
 
         @Override
         public void onActivityPaused(Activity activity) {
-            Logger.d(TAG, "onActivityPaused: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityPaused: " + activity.getClass().getSimpleName());
         }
 
         @Override
         public void onActivityDestroyed(Activity activity) {
-            Logger.d(TAG, "onActivityDestroyed: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityDestroyed: " + activity.getClass().getSimpleName());
             if (mActivities.contains(activity)) {
                 mActivities.remove(activity);
             }
@@ -81,7 +81,7 @@ public class MainApplication extends RePluginApplication {
 
         @Override
         public void onActivityCreated(Activity activity, Bundle bundle) {
-            Logger.d(TAG, "onActivityCreated: " + activity.getClass().getSimpleName());
+//            Logger.d(TAG, "onActivityCreated: " + activity.getClass().getSimpleName());
             if (!mActivities.contains(activity)) {
                 mActivities.add(activity);
             }
