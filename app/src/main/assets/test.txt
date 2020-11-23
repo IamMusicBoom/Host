@@ -1,0 +1,128 @@
+{
+    "plugins": [
+      {
+        "name": "ttk",
+        "versionCode": "10101",
+        "versionName": "1.1.1",
+        "iconUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-records.png",
+        "downloadUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-ttk-app.apk",
+        "serverIp": "119.3.77.160",
+        "serverPort": "59688",
+        "alarmEnable": true,
+        "alarmCycle": 1,
+        "alarmClass": "com.optima.plugin.ttk.broadcast.RepeatingTaskReceiver",
+        "launcherAuto": true,
+        "launcherType": "service",
+        "launcherClass": "com.optima.plugin.ttk.service.InterpttService",
+        "serverType": "joint"
+      },
+      {
+        "name": "videolive",
+        "versionCode": "10101",
+        "versionName": "1.1.1",
+        "iconUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-takevideo.png",
+        "downloadUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-videolive-app.apk",
+        "serverUrl": "http://122.112.142.163:11579/stream",
+        "alarmEnable": false,
+        "alarmCycle": 0,
+        "launcherAuto": true,
+        "launcherType": "service",
+        "launcherClass": "com.optima.plugin.videolive.service.VideoLiveService",
+        "serverType": "link"
+      },
+      {
+        "name": "daily",
+        "versionCode": "10101",
+        "versionName": "1.1.1",
+        "iconUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-grouplocation.png",
+        "downloadUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-daily-app.apk",
+        "serverUrl": "http://122.112.142.163:11579/daily",
+        "alarmEnable": false,
+        "alarmCycle": 0,
+        "launcherAuto": true,
+        "launcherType": "service",
+        "launcherClass": "com.optima.plugin.daily.main.MainService",
+        "serverType": "link"
+      },
+      {
+        "name": "wificamera"
+        "versionCode": "10101",
+        "versionName": "1.1.1",
+        "iconUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-grouplocation.png",
+        "downloadUrl": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-wificamera-app.apk",
+        "serverUrl": null,
+        "alarmEnable": false,
+        "alarmCycle": 0,
+        "launcherAuto": false,
+        "launcherType": "activity",
+        "launcherClass": "com.optima.plugin.wificamera.activities.IndexActivity",
+        "serverType": null
+      }
+    ],
+    "menus": [
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-records.png",
+        "name": "无线相机",
+        "menuClass": "com.optima.plugin.wificamera.activities.IndexActivity",
+        "typeName": "类型一",
+        "typeCode": "type1",
+        "pluginName": "wificamera"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-records.png",
+        "name": "集群对讲",
+        "menuClass": "com.optima.plugin.ttk.activity.SingleChannelTalkActivity",
+        "typeName": "类型一",
+        "typeCode": "type1",
+        "pluginName": "ttk"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-talkback.png",
+        "name": "对讲回放",
+        "menuClass": "com.optima.plugin.ttk.activity.PlayBackActivity",
+        "typeName": "类型四",
+        "typeCode": "type4",
+        "pluginName": "ttk"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-grouplocation.png",
+        "name": "群组定位",
+        "menuClass": "com.optima.plugin.daily.task.activity.TaskAndEventMapActivity",
+        "typeName": "类型一",
+        "typeCode": "type1",
+        "pluginName": "daily"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-daily-event.png",
+        "name": "日常指令",
+        "menuClass": "com.optima.plugin.daily.task.activity.OrderListActivity",
+        "typeName": "类型二",
+        "typeCode": "type2",
+        "pluginName": "daily"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-daily-case.png",
+        "name": "日常事件",
+        "menuClass": "om.optima.plugin.daily.task.activity.EventListActivity",
+        "typeName": "类型二",
+        "typeCode": "type2",
+        "pluginName": "daily"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-daily-task.png",
+        "name": "日常任务",
+        "menuClass": "com.optima.plugin.daily.task.activity.TaskListActivity",
+        "typeName": "类型二",
+        "typeCode": "type2",
+        "pluginName": "daily"
+      },
+      {
+        "icon": "http://192.168.0.240:8081/repository/hncy/Android/Plugin/Test/Plugin-Test-takevideo.png",
+        "name": "主动回传",
+        "menuClass": "com.optima.plugin.videolive.activity.VideoCallOutActivity",
+        "typeName": "类型四",
+        "typeCode": "type4",
+        "pluginName": "videolive"
+      }
+    ]
+  }

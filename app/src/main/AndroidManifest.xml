@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UsePluginResourceActivity"></activity>
+        <activity android:name=".databases.DBTestActivity"></activity>
+        <activity android:name=".activity.UsePluginResourceActivity" />
         <activity android:name=".activity.ThreadPoolActivity" />
         <activity android:name=".activity.JobIntentServiceActivity" />
         <activity android:name=".activity.UsePluginViewActivity" />
@@ -78,7 +79,7 @@
             android:name=".view.gesture.LockScreenActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.BinderTestActivity" />
-        <activity android:name=".activity.DownloadActivity"></activity>
+        <activity android:name=".activity.DownloadActivity" />
 
         <service android:name=".service.CommonAIDLService">
             <intent-filter>
@@ -94,7 +95,7 @@
 
         <activity android:name=".activity.DOCSelectActivity" />
 
-        <service android:name=".thread.DownloadService"></service>
+        <service android:name=".thread.DownloadService" />
         <service android:name=".download.DownloadService" />
 
         <activity

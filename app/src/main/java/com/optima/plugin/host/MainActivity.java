@@ -22,6 +22,7 @@ import com.optima.plugin.host.activity.UsePluginFragmentActivity;
 import com.optima.plugin.host.activity.UsePluginResourceActivity;
 import com.optima.plugin.host.activity.UsePluginViewActivity;
 import com.optima.plugin.host.activity.WaveViewActivity;
+import com.optima.plugin.host.databases.DBTestActivity;
 import com.optima.plugin.host.view.gesture.LockScreenActivity;
 import com.optima.plugin.host.activity.NotificationTestActivity;
 import com.optima.plugin.host.activity.PluginManagerTestActivity;
@@ -161,8 +162,10 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         }else if(v.getId() == R.id.btn_plugin_resource){
             Intent intent = new Intent(MainActivity.this, UsePluginResourceActivity.class);
             startActivity(intent);
+        }else if(v.getId() == R.id.btn_db_test){
+            Intent intent = new Intent(MainActivity.this, DBTestActivity.class);
+            startActivity(intent);
         }
-
     }
 
 
