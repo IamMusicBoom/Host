@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ThreadPoolActivity"></activity>
+        <activity android:name=".activity.UsePluginResourceActivity"></activity>
+        <activity android:name=".activity.ThreadPoolActivity" />
         <activity android:name=".activity.JobIntentServiceActivity" />
         <activity android:name=".activity.UsePluginViewActivity" />
         <activity android:name=".activity.UsePluginFragmentActivity" />
@@ -77,8 +78,7 @@
             android:name=".view.gesture.LockScreenActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.BinderTestActivity" />
-        <activity android:name=".activity.DownloadActivity">
-        </activity>
+        <activity android:name=".activity.DownloadActivity"></activity>
 
         <service android:name=".service.CommonAIDLService">
             <intent-filter>
@@ -91,13 +91,15 @@
         <service
             android:name=".service.WorkService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        
-        <activity android:name=".activity.DOCSelectActivity"/>
-        <service android:name=".thread.DownloadService">
-        </service>
-        <service android:name=".download.DownloadService"/>
-        <activity android:name=".download.ui.DownloadActivity"
-            android:theme="@style/MyTranslucentTheme"/>
+
+        <activity android:name=".activity.DOCSelectActivity" />
+
+        <service android:name=".thread.DownloadService"></service>
+        <service android:name=".download.DownloadService" />
+
+        <activity
+            android:name=".download.ui.DownloadActivity"
+            android:theme="@style/MyTranslucentTheme" />
     </application>
 
 </manifest>

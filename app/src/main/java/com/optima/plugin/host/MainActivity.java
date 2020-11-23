@@ -1,7 +1,6 @@
 package com.optima.plugin.host;
 
 
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +18,8 @@ import com.optima.plugin.host.activity.DOCSelectActivity;
 import com.optima.plugin.host.activity.DownloadActivity;
 import com.optima.plugin.host.activity.HomeActivity;
 import com.optima.plugin.host.activity.JobIntentServiceActivity;
-import com.optima.plugin.host.activity.ThreadPoolActivity;
 import com.optima.plugin.host.activity.UsePluginFragmentActivity;
+import com.optima.plugin.host.activity.UsePluginResourceActivity;
 import com.optima.plugin.host.activity.UsePluginViewActivity;
 import com.optima.plugin.host.activity.WaveViewActivity;
 import com.optima.plugin.host.view.gesture.LockScreenActivity;
@@ -31,9 +30,7 @@ import com.optima.plugin.host.activity.ReflexTestActivity;
 import com.optima.plugin.host.activity.ServiceTestActivity;
 import com.optima.plugin.repluginlib.Logger;
 import com.optima.plugin.repluginlib.TestActivity;
-import com.optima.plugin.repluginlib.pluginUtils.P_Binder;
 import com.optima.plugin.repluginlib.pluginUtils.P_Constants;
-import com.optima.plugin.repluginlib.pluginUtils.P_Context;
 import com.optima.plugin.repluginlib.pluginUtils.P_FileUtil;
 import com.optima.plugin.repluginlib.pluginUtils.P_Manager;
 import com.optima.plugin.repluginlib.base.BasePermissionActivity;
@@ -81,8 +78,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.btn_go_plugin_activity) {// 跳转到插件Activity
             Intent intent = new Intent();
-//            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
-            intent.setComponent(new ComponentName("com.optima.plugin.plugindaily","com.optima.plugin.daily.task.activity.IndexActivity"));
+            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
+//            intent.setComponent(new ComponentName("com.optima.plugin.plugindaily","com.optima.plugin.daily.task.activity.IndexActivity"));
             startActivity(intent, true);
         } else if (v.getId() == R.id.btn_go_plugin_activity_for_result) {// 跳转插件Activity并且有返回值
             Intent intent = new Intent();
@@ -160,6 +157,9 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             startActivity(intent);
         }else if(v.getId() == R.id.btn_doc_select){
             Intent intent = new Intent(MainActivity.this, DOCSelectActivity.class);
+            startActivity(intent);
+        }else if(v.getId() == R.id.btn_plugin_resource){
+            Intent intent = new Intent(MainActivity.this, UsePluginResourceActivity.class);
             startActivity(intent);
         }
 
