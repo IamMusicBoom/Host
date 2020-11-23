@@ -1,4 +1,4 @@
 include ':app'
 include ':repluginlib'
-project (':repluginlib').projectDir = new File('F:\\plugin\\repluginlib')
+project (':repluginlib').projectDir = new File('../Repluginlib')
 rootProject.name='Host'
