@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            storeFile file('../../repluginlib/ZFY.keystore')
+            storeFile file('../../lib/host_lib/repluginlib/ZFY.keystore')
             keyAlias = 'zft_01'
             storePassword 'optima61501735'
             keyPassword 'optima61501735'
         }
         debug {
-            storeFile file('../../repluginlib/ZFY.keystore')
+            storeFile file('../../lib/host_lib/repluginlib/ZFY.keystore')
             keyAlias = 'zft_01'
             storePassword 'optima61501735'
             keyPassword 'optima61501735'
@@ -25,15 +25,26 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        zfy_keystore {
+            keyAlias 'zft_01'
+            keyPassword 'optima61501735'
+            storeFile file('F:\\work\\ZFT\\ZFY.keystore')
+            storePassword 'optima61501735'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.zfy_keystore
         }
+
     }
     packagingOptions {
         exclude 'META-INF/ASL2.0'
     }
+
 
 }
 // ATTENTION!!! Must be PLACED AFTER "android{}" to read the applicationId
@@ -60,7 +71,7 @@ repluginHostConfig {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.qihoo360.replugin:replugin-host-lib:2.3.3'
+    implementation 'com.qihoo360.replugin:replugin-host-lib:2.3.4'
     implementation project(path: ':repluginlib')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'

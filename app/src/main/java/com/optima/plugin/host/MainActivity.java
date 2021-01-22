@@ -51,17 +51,17 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         setNeedCheckPermission(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Logger.d(TAG, "onCreate: " + P_Manager.getPluginVersion(P_Constants.ALIAS_PLUGIN_1));
-        boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
-        if (pluginRunning) {
-            return;
-        }
+//        Logger.d(TAG, "onCreate: " + P_Manager.getPluginVersion(P_Constants.ALIAS_PLUGIN_1));
+//        boolean pluginRunning = RePlugin.isPluginRunning(P_Constants.ALIAS_PLUGIN_1);
+//        if (pluginRunning) {
+//            return;
+//        }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 fileNames.add(FILE_NAME_PLUGIN_1);
-//                fileNames.add(FILE_NAME_PLUGIN_2);
+                fileNames.add(FILE_NAME_PLUGIN_2);
                 P_FileUtil.simulateInstallExternalPlugin(fileNames);
             }
         }).start();
@@ -81,7 +81,13 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             Intent intent = new Intent();
             intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));
 //            intent.setComponent(new ComponentName("com.optima.plugin.plugindaily","com.optima.plugin.daily.task.activity.IndexActivity"));
+//            intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_2, P_Constants.PACKAGE_NAME_PLUGIN_2 + ".Plugin2MainActivity"));
+//            intent.setComponent(new ComponentName("com.wma.plugintest", "com.wma.plugintest.MainActivity"));
             startActivity(intent, true);
+
+//            intent.setComponent(new ComponentName("voip", "com.optima.plugin.voip.VOIPService"));
+//            startService(intent,true);
+
         } else if (v.getId() == R.id.btn_go_plugin_activity_for_result) {// 跳转插件Activity并且有返回值
             Intent intent = new Intent();
             intent.setComponent(new ComponentName(P_Constants.ALIAS_PLUGIN_1, P_Constants.PACKAGE_NAME_PLUGIN_1 + ".Plugin1MainActivity"));

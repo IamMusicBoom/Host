@@ -29,6 +29,8 @@ public class UsePluginFragmentActivity extends AppCompatActivity implements View
         if (v.getId() == R.id.btn_get_plugin_fragment) {// 获取插件fragment对象
             //代码使用插件Fragment
             try {
+                RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_1);
+                RePlugin.fetchComponentList(P_Constants.ALIAS_PLUGIN_2);
                 ClassLoader classLoader = RePlugin.fetchClassLoader(P_Constants.ALIAS_PLUGIN_1);
                 Fragment fragment = classLoader.loadClass("com.optima.plugin.plugin1.TestFragment").asSubclass(Fragment.class).newInstance();//使用插件的Classloader获取指定Fragment实例
                 getFragmentManager().beginTransaction().replace(R.id.container2, fragment,"TestFragment").commit();
